@@ -12,6 +12,7 @@ class WheelSectorViewModel: ObservableObject {
     @Published var segments: [PieSegment] = [] // Array to hold segment colors and corresponding labels
     @Published var winner: String? = nil // Variable to hold the winner label
     
+<<<<<<< HEAD
     //initialize with set data
     init() {
         getItems()
@@ -66,4 +67,17 @@ class WheelSectorViewModel: ObservableObject {
         return availableColors[randomIndex]
     }
 
+=======
+   struct PieSegment {
+       let color: Color
+       let label: String
+   }
+   
+    func addItem(label: String) {
+        
+        let previousColor = segments.last?.color
+        segments.append(PieSegment(color: randomColor(previousColor: previousColor), label: label)) // Generate a random color for the segment and add it to the ViewModel
+    }
+ 
+>>>>>>> bea3a5716fb12718822d1acbfdee91fe42082dae
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     var body: some View {
+<<<<<<< HEAD
         NavigationStack {
             VStack {
                 Text("Welcome to Spinnie!")
@@ -43,4 +44,12 @@ struct ListView_Previews: PreviewProvider {
             WelcomeView()
         }
     }
+=======
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    }
+}
+
+#Preview {
+    WelcomeView()
+>>>>>>> bea3a5716fb12718822d1acbfdee91fe42082dae
 }
