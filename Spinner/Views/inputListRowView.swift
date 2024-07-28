@@ -1,4 +1,3 @@
-//
 //  itemView.swift
 //  Spinner
 //
@@ -6,17 +5,14 @@
 //
 
 import SwiftUI
+// Ensure this import is available if PieSegment is part of WheelSectorViewModel
+import Foundation
 
-<<<<<<< HEAD
 struct InputListRowView: View {
-=======
-struct InputListView: View {
->>>>>>> bea3a5716fb12718822d1acbfdee91fe42082dae
-    
-    let item: PieSegment
+    let item: WheelSectorViewModel.PieSegment
     
     var body: some View {
-        HStack{
+        HStack {
             Image(systemName: "heart")
                 .foregroundColor(.red)
                 .padding(6)
@@ -29,21 +25,10 @@ struct InputListView: View {
     }
 }
 
-<<<<<<< HEAD
 struct InputListRowView_Previews: PreviewProvider {
-=======
-struct InputListView_Previews: PreviewProvider {
->>>>>>> bea3a5716fb12718822d1acbfdee91fe42082dae
-    static var item1 = PieSegment(color: .blue, label: "This is a choice")
+    static var item1 = WheelSectorViewModel.PieSegment(color: .blue, label: "This is a choice")
     
-    static var previews: some View
-    {
-       
-<<<<<<< HEAD
+    static var previews: some View {
         InputListRowView(item: item1)
-=======
-        InputListView(item: item1)
->>>>>>> bea3a5716fb12718822d1acbfdee91fe42082dae
-
     }
 }

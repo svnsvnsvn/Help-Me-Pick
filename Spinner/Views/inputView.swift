@@ -1,4 +1,3 @@
-//
 //  InputView.swift
 //  Spinner
 //
@@ -8,48 +7,32 @@
 import SwiftUI
 
 struct InputView: View {
-<<<<<<< HEAD
     @ObservedObject var viewModel: WheelSectorViewModel // ViewModel instance
     var inputRadius: CGFloat = 25
+
     var body: some View {
-        VStack(spacing: 10){
+        VStack(spacing: 10) {
             Spacer()
-            //Text("\(inputRadius)")
             Image(systemName: "chevron.up")
             Text("Entered items")
                 .foregroundStyle(.pink)
             List {
-                ForEach(viewModel.segments) {label in
+                ForEach(viewModel.segments, id: \.label) { label in
                     InputListRowView(item: label)
                 }
                 .onDelete(perform: viewModel.deleteItem)
-            }.listStyle(.plain)
-
+            }
+            .listStyle(.plain)
         }
         .frame(maxWidth: .infinity)
-        .background((Color(#colorLiteral(red: 0.9764741063, green: 0.9568442702, blue: 0.9490130544, alpha: 0.7636589404)
-            )))
-        //.ignoresSafeArea(edges: .bottom)
-
+        .background(Color(#colorLiteral(red: 0.9764741063, green: 0.9568442702, blue: 0.9490130544, alpha: 0.7636589404)))
         .cornerRadius(inputRadius)
     }
 }
+
 struct InputView_Previews: PreviewProvider {
-    
-    static var previews: some View
-    {
+    static var previews: some View {
         let viewModel = WheelSectorViewModel(label: "hi")
-
         InputView(viewModel: viewModel)
-
     }
-=======
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-#Preview {
-    InputView()
->>>>>>> bea3a5716fb12718822d1acbfdee91fe42082dae
 }

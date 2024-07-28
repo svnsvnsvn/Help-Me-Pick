@@ -1,11 +1,3 @@
-//
-//  WheelSectorModel.swift
-//  Spinner
-//
-//  Created by Ann Ubaka on 3/13/24.
-//
-
-<<<<<<< HEAD
 import SwiftUI
 
 struct PieSegment: Identifiable {
@@ -19,6 +11,3 @@ struct PieSegment: Identifiable {
         self.label = label
     }
 }
-=======
-import Foundation
->>>>>>> bea3a5716fb12718822d1acbfdee91fe42082dae
