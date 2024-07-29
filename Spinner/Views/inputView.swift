@@ -32,7 +32,7 @@ struct InputView: View {
 
 struct InputView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = WheelSectorViewModel(label: "hi")
+        let viewModel = WheelSectorViewModel(label: "you're awesome")
         InputView(viewModel: viewModel)
     }
 }

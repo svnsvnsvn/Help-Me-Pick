@@ -66,101 +66,136 @@ struct WheelView: View {
     // Constant angular velocity for rotation
     let angularVelocity: Double = 720 // 360 degrees per second
     
+    @State var startingOffsetY: CGFloat = UIScreen.main.bounds.height * 0.75
+    @State var currDragOffsetY: CGFloat = 0
+    @State var endingOffsetY: CGFloat = 0
+    
+    // Frames
+    let wheelFrame: (CGFloat, CGFloat) = (300, 350)
+    
     var body: some View {
-        VStack {
-            Text("Welcome! Please enter your choices here.")
-            TextField("Items go here", text: $itemElement) // Text field for user input
-                .textFieldStyle(RoundedBorderTextFieldStyle()) // Apply a rounded border to the text field
-                .padding(.horizontal)
-                .frame(width: 300)
-            Button(action: {
-                if (!itemElement.isEmpty && viewModel.segments.count < 10) { // Check if the text field is not empty and less than 10 segments
-                    let previousColor = viewModel.segments.last?.color
-                    viewModel.segments.append(WheelSectorViewModel.PieSegment(color: randomColor(previousColor: previousColor), label: itemElement)) // Generate a random color for the segment and add it to the ViewModel
-                    itemElement = "" // Clear the text field after adding the item
-                }
-            }, label: {
-                Text("Add Item!")
-                    .padding()
-                    .padding(.horizontal, 20)
-                    .foregroundColor(.white)
-                    .background(
-                        Color(#colorLiteral(red: 0.9174461961, green: 0.7464284301, blue: 0.9083302021, alpha: 1))
-                            .cornerRadius(15.0)
-                            .shadow(radius: 10)
-                    )
-            })
-            // Draw the pie chart using segments from the ViewModel
-            ZStack {
-                ZStack {
-                    Circle()
-                        .fill(Color(#colorLiteral(red: 0.6711944938, green: 0.668287456, blue: 0.7133514285, alpha: 0.5))) // Background circle color
-                        .frame(width: 400, height: 350)
-                    
-                    ForEach(0..<viewModel.segments.count, id: \.self) { index in
-                        Pie(startAngle: Angle(degrees: Double(index) * (360.0 / Double(viewModel.segments.count))), // Calculate start angle based on segment index
-                            endAngle: Angle(degrees: Double(index + 1) * (360.0 / Double(viewModel.segments.count)))) // Calculate end angle based on segment index
-                            .fill(self.viewModel.segments[index].color) // Fill the segment with color from the ViewModel
-                            .frame(width: 300, height: 350)
-                            .overlay(
-                                Text(self.viewModel.segments[index].label) // Display the label text
-                                    .foregroundColor(.black)
-                                    .lineLimit(1) // Ensure single line of text
-                                    .frame(width: 70, height: 50)
-                                    .minimumScaleFactor(0.75)
-                                    .scaledToFit()
-                                    .rotationEffect(self.labelRotation(forIndex: index, segmentCount: viewModel.segments.count)) // Update rotation
-                                    .position(self.labelPosition(forIndex: index, segmentCount: viewModel.segments.count)) // Update position
-                                    .padding([.horizontal], 10)
-                            )
-                            .frame(width: 400, height: 350)
+        ZStack {
+            VStack {
+                Text("Welcome! Please enter your choices here.")
+                TextField("Items go here", text: $itemElement) // Text field for user input
+                    .textFieldStyle(RoundedBorderTextFieldStyle()) // Apply a rounded border to the text field
+                    .padding(.horizontal)
+                    .frame(width: 300)
+                Button(action: {
+                    if (!itemElement.isEmpty && viewModel.segments.count < 10) { // Check if the text field is not empty and less than 10 segments
+                        let previousColor = viewModel.segments.last?.color
+                        viewModel.segments.append(WheelSectorViewModel.PieSegment(color: randomColor(previousColor: previousColor), label: itemElement)) // Generate a random color for the segment and add it to the ViewModel
+                        itemElement = "" // Clear the text field after adding the item
                     }
+                }, label: {
+                    Text("Add Item!")
+                        .padding()
+                        .padding(.horizontal, 20)
+                        .foregroundColor(.white)
+                        .background(
+                            Color(#colorLiteral(red: 0.9174461961, green: 0.7464284301, blue: 0.9083302021, alpha: 1))
+                                .cornerRadius(15.0)
+                                .shadow(radius: 10)
+                        )
+                })
+                // Draw the pie chart using segments from the ViewModel
+                ZStack {
+                    ZStack {
+                        Circle()
+                            .fill(Color(#colorLiteral(red: 0.6711944938, green: 0.668287456, blue: 0.7133514285, alpha: 0.5))) // Background circle color
+                            .frame(width: 400, height: 350)
+                        
+                        ForEach(0..<viewModel.segments.count, id: \.self) { index in
+                            Pie(startAngle: Angle(degrees: Double(index) * (360.0 / Double(viewModel.segments.count))), // Calculate start angle based on segment index
+                                endAngle: Angle(degrees: Double(index + 1) * (360.0 / Double(viewModel.segments.count)))) // Calculate end angle based on segment index
+                                .fill(self.viewModel.segments[index].color) // Fill the segment with color from the ViewModel
+                                .frame(width: wheelFrame.0, height: wheelFrame.1)
+                                .overlay(
+                                    Text(self.viewModel.segments[index].label) // Display the label text
+                                        .foregroundColor(.black)
+                                        .lineLimit(1) // Ensure single line of text
+                                        .frame(width: 70, height: 50)
+                                        .minimumScaleFactor(0.75)
+                                        .scaledToFit()
+                                        .rotationEffect(self.labelRotation(forIndex: index, segmentCount: viewModel.segments.count)) // Update rotation
+                                        .position(self.labelPosition(forIndex: index, segmentCount: viewModel.segments.count)) // Update position
+                                        .padding([.horizontal], 10)
+                                )
+                                .frame(width: 400, height: 350)
+                        }
 
-                }
-                .rotationEffect(Angle(degrees: rotationAngle)) // Apply rotation effect
-                .gesture(
-                    TapGesture()
-                        .onEnded { _ in
-                            if !isSpinning {
-                                let randomDuration = randomDuration()
-                                withAnimation(
-                                    Animation.easeOut(duration: TimeInterval(randomDuration))
-                                ) {
-                                    rotationAngle += angularVelocity * randomDuration // Update rotation angle based on angular velocity and random duration
-                                    isSpinning = true // Indicate spinning is in progress
-                                    
-                                    // Randomly select a winner when spinning stops
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + randomDuration) {
-                                        // Calculate the winner index based on the heart picker position
-                                        let sectionAngle = 360.0 / Double(viewModel.segments.count) // Calculate the angle for each segment
-                                        let fixedAngle = 90.0 // Angle at which the spinner icon is fixed (12 o'clock position)
-                                        let normalizedRotationAngle = (rotationAngle + fixedAngle).truncatingRemainder(dividingBy: 360) // Normalize the rotation angle
-                                        let relativeAngle = (360 - normalizedRotationAngle).truncatingRemainder(dividingBy: 360)
-                                        let winnerIndex = Int((relativeAngle / sectionAngle)) % viewModel.segments.count // Determine the winner index
-                                        viewModel.winner = viewModel.segments[winnerIndex].label
-                                        isSpinning = false // Indicate spinning is complete
+                    }
+                    .rotationEffect(Angle(degrees: rotationAngle)) // Apply rotation effect
+                    .gesture(
+                        TapGesture()
+                            .onEnded { _ in
+                                if !isSpinning {
+                                    let randomDuration = randomDuration()
+                                    withAnimation(
+                                        Animation.easeOut(duration: TimeInterval(randomDuration))
+                                    ) {
+                                        rotationAngle += angularVelocity * randomDuration // Update rotation angle based on angular velocity and random duration
+                                        isSpinning = true // Indicate spinning is in progress
+                                        
+                                        // Randomly select a winner when spinning stops
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + randomDuration) {
+                                            // Calculate the winner index based on the heart picker position
+                                            let sectionAngle = 360.0 / Double(viewModel.segments.count) // Calculate the angle for each segment
+                                            let fixedAngle = 90.0 // Angle at which the spinner icon is fixed (12 o'clock position)
+                                            let normalizedRotationAngle = (rotationAngle + fixedAngle).truncatingRemainder(dividingBy: 360) // Normalize the rotation angle
+                                            let relativeAngle = (360 - normalizedRotationAngle).truncatingRemainder(dividingBy: 360)
+                                            let winnerIndex = Int((relativeAngle / sectionAngle)) % viewModel.segments.count // Determine the winner index
+                                            viewModel.winner = viewModel.segments[winnerIndex].label
+                                            isSpinning = false // Indicate spinning is complete
+                                        }
+                                        
                                     }
-                                    
                                 }
+                            }
+                    )
+                }.padding()
+                    .overlay(alignment: .top){
+                        // Picker icon that points to the winner when the wheel is spun
+                        PickerIcon()
+                    }
+                
+                // Display the winner if available
+                if let winner = viewModel.winner {
+                    Text("Winner: \(winner)")
+                        .padding(20)
+                        .foregroundColor(.green)
+                        .font(.headline)
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(#colorLiteral(red: 0.9188740253, green: 0.7445629835, blue: 0.911600709, alpha: 1)))
+            
+            // User input Screen for modifying inputs
+            InputView(viewModel: viewModel)
+                .offset(y: startingOffsetY)
+                .offset(y: currDragOffsetY)
+                .offset(y: endingOffsetY)
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            withAnimation(.spring()) {
+                                currDragOffsetY = value.translation.height
+                            }
+                        }
+                        .onEnded { value in
+                            withAnimation(.spring()) {
+                                if currDragOffsetY < -150 {
+                                    endingOffsetY = -startingOffsetY
+                                } else if endingOffsetY != 0 && currDragOffsetY > 150 {
+                                    endingOffsetY = 0
+                                }
+                                
+                                currDragOffsetY = 0
                             }
                         }
                 )
-            }.padding()
-                .overlay(alignment: .top){
-                    // Picker icon that points to the winner when the wheel is spun
-                    PickerIcon()
-                }
-            
-            // Display the winner if available
-            if let winner = viewModel.winner {
-                Text("Winner: \(winner)")
-                    .padding(20)
-                    .foregroundColor(.green)
-                    .font(.headline)
-            }
+                .ignoresSafeArea(edges: .bottom)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(#colorLiteral(red: 0.9188740253, green: 0.7445629835, blue: 0.911600709, alpha: 1)))
     }
     
     // Update the labelPosition function to ensure proper positioning
