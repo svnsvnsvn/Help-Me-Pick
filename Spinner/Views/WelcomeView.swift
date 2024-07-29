@@ -16,7 +16,7 @@ struct WelcomeView: View {
                     .foregroundStyle(.gray)
                     .fontDesign(.serif)
                     .padding()
-                NavigationLink(destination: MainView(viewModel: WheelSectorViewModel())) {
+                NavigationLink(destination: WheelView(viewModel: WheelSectorViewModel())) {
                     Image(systemName: "heart.fill")
                         .resizable()
                         .foregroundStyle(Color(#colorLiteral(red: 1, green: 0.8511019349, blue: 1, alpha: 1)))
