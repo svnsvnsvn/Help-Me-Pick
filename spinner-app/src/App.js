@@ -1,22 +1,27 @@
+import React, {useState} from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Welcome from "./components/Welcome/Welcome";
+import Spinner from "./components/Spinner/Spinner";
+import InputList from "./components/InputList/InputList";
 
-function App() {
+const App = () => {
+  const [segments, setSegments] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        <Route
+          path="/spinner"
+          element={<Spinner segments={segments} />}
+        />
+        <Route
+          path="/input"
+          element={<InputList segments={segments} setSegments={setSegments} />}
+        />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

@@ -1,4 +1,6 @@
 /swift
+/node_modules
+spinner-app/node_modules/
 
 # dependencies
 /node_modules
