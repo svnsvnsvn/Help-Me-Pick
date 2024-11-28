@@ -4,5 +4,5 @@
 //     return availableColors[Math.floor(Math.random() * availableColors.length)];
 //   };
   
-  export const randomDuration = () => Math.random() * 5 + 2;
+  // export const randomDuration = () => Math.random() * 5 + 2;
   

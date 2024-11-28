@@ -1,12 +1,18 @@
 import React from "react";
 
-const InputListRow = ({ segment }) => {
+const InputListRow = ({ segment, deleteItem }) => {
   return (
-    <li>
+    <div className='optionItem'>
       <span style={{ color: `rgb(${segment.color.red * 255}, ${segment.color.green * 255}, ${segment.color.blue * 255})`,}}>
         {segment.label}
       </span>
-    </li>
+      <div>
+        <p onClick={()=> deleteItem(segment.id)}>✗</p>
+        <p onClick={()=> deleteItem(segment.id)}>✗</p>
+      </div>
+
+    </div>
+
   );
 };
 

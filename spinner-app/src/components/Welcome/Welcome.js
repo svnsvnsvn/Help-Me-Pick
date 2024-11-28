@@ -8,7 +8,7 @@ const Welcome = () => {
   return (
     <div className="welcome">
       <h1>Welcome to Spinnie!</h1>
-      <button onClick={() => navigate("/input")}>Get Started</button>
+      <button onClick={() => navigate("/spinner")}>Get Started</button>
     </div>
   );
 };

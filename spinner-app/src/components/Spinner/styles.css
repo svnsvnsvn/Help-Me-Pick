@@ -1,8 +1,80 @@
+:root {
+  background-color: bisque;
+}
+/* Default styles for desktop and larger screens */
+.spinner-container {
+  display: flex;
+  flex-direction: row; /* Row layout for desktops/laptops */
+  align-items: flex-start; /* Aligns items to the top */
+  justify-content: space-evenly;
+  gap: 2rem;
+  max-width: 1200px; /* Prevents overly wide layout */
+  margin: 0 auto;
+}
+
+/* Mobile-specific styles for screens 600px or smaller */
+@media screen and (max-width: 600px) {
+  .spinner-container {
+    flex-direction: column-reverse; /* Stacks items in reverse order */
+    gap: 1rem; /* Reduce spacing between items */
+    align-items: center; /* Center-align items */
+    text-align: center; /* Ensures text aligns properly */
+    padding: 1rem; /* Adds breathing room on small screens */
+  }
+
+  /* Ensures spinner appears at the top */
+  .spinner {
+    order: 0; /* Lower order makes this appear first */
+  }
+
+  .spinner-wheel {
+    margin: 0 auto; /* Centers spinner on mobile */
+    width: 200px;
+    height: 200px;
+  }
+
+  .input-list {
+    max-width: 300px; /* Fits smaller screens */
+    order: -1;
+  }
+
+  .input-group input {
+    width: 80%; /* Allows input to adjust to screen size */
+  }
+
+  button {
+    width: 80%; /* Makes buttons fit mobile screens */
+  }
+}
+
+.input-list {
+  width: 100%;
+  min-height: 500px;
+  max-width: 400px;
+  align-items: flex-start; /* Align input list items to the top */
+  background-color:beige;
+  border-radius: 15px;
+  padding: 0px 20px;
+}
+
+.input-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input-group input {
+  flex-grow: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
 .spinner {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
   }
   
   .spinner-wheel {
@@ -15,18 +87,48 @@
   }
   
   button {
-    margin-top: 20px;
-    padding: 10px 20px;
+    padding: 0.5rem 1rem;
     font-size: 16px;
     cursor: pointer;
     border: none;
-    background-color: #f06;
+    background-color: #F87B7A;
+    color: white;
+    border-radius: 5px;
+  }
+
+  button:hover {
+    background-color: #F87B7A;
+  }
+
+  #spinBtn {
+    margin-top: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #F87B7A;
     color: white;
     border-radius: 5px;
   }
   
-  button:disabled {
+  #spinBtn:disabled {
     background-color: #aaa;
     cursor: not-allowed;
   }
   
+
+  .winner {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: green;
+  }
+ 
+  .optionItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  ul {
+    padding-left: 0;
+  }
