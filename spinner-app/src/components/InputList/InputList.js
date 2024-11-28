@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import InputListRow from "./InputListRow";
 import "./styles.css";
 
 const InputList = ({ segments, setSegments }) => {
   const [input, setInput] = useState("");
+  const navigate = useNavigate();
 
   /**
  * Function to generate a random pastel color, avoiding a given previous color if provided.
@@ -39,19 +41,33 @@ const InputList = ({ segments, setSegments }) => {
     // generate a randpm index within the range of the filtered array
     const randomIndex = Math.floor(Math.random() * availableColors.length);
 
-    // 
-
-
+    // Return the randomly selected color from the filtered array
+    return availableColors[randomIndex];
   };
 
   const addItem = () => {
-    if (!input.trim()) return;
-    setSegments([...segments, { label: input, color: randomColor() }]);
-    setInput("");
+    if (!input.trim()){
+        alert("Uh oh, you need to add something");
+    } else {
+        setSegments([...segments, { label: input, color: randomColor() }]);
+        setInput("");
+        
+    }
+
+  };
+
+  useEffect(() => {
+    console.log("Updated Segments:", segments);
+  }, [segments]); // Trigger whenever `segments` changes
+
+  const goToSpinner = () => {
+    navigate("/spinner");
   };
 
   return (
+    
     <div className="input-list">
+      <h1>Hello, please enter items!</h1>
       <input
         type="text"
         value={input}
@@ -59,10 +75,13 @@ const InputList = ({ segments, setSegments }) => {
         placeholder="Enter item"
       />
       <button onClick={addItem}>Add</button>
+      <button onClick={goToSpinner}>Go to Spinner</button>
+
       <ul>
         {segments.map((segment, index) => (
           <InputListRow key={index} segment={segment} />
         ))}
+        
       </ul>
     </div>
   );

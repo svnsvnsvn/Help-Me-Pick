@@ -8,17 +8,17 @@ const App = () => {
   const [segments, setSegments] = useState([]);
 
   return (
+    
     <Router>
       <Routes>
+        {/* Route for the welcome screen */}
         <Route path="/" element={<Welcome />} />
-        <Route
-          path="/spinner"
-          element={<Spinner segments={segments} />}
-        />
-        <Route
-          path="/input"
-          element={<InputList segments={segments} setSegments={setSegments} />}
-        />
+
+        {/* Route for the spinner page */}
+        <Route path="/spinner" element={<Spinner segments={segments} />}/>
+
+        {/* Route for the input list page */}
+        <Route path="/input" element={<InputList segments={segments} setSegments={setSegments} />}/>
       </Routes>
     </Router>
   );
