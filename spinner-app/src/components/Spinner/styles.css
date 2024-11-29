@@ -1,7 +1,11 @@
 :root {
-  background-color: bisque;
+  background-color: rgb(44, 33, 45);
 }
-/* Default styles for desktop and larger screens */
+
+* {
+  font-family: sans-serif;
+}
+
 .spinner-container {
   display: flex;
   flex-direction: row; /* Row layout for desktops/laptops */
@@ -9,50 +13,15 @@
   justify-content: space-evenly;
   gap: 2rem;
   max-width: 1200px; /* Prevents overly wide layout */
-  margin: 0 auto;
-}
-
-/* Mobile-specific styles for screens 600px or smaller */
-@media screen and (max-width: 600px) {
-  .spinner-container {
-    flex-direction: column-reverse; /* Stacks items in reverse order */
-    gap: 1rem; /* Reduce spacing between items */
-    align-items: center; /* Center-align items */
-    text-align: center; /* Ensures text aligns properly */
-    padding: 1rem; /* Adds breathing room on small screens */
-  }
-
-  /* Ensures spinner appears at the top */
-  .spinner {
-    order: 0; /* Lower order makes this appear first */
-  }
-
-  .spinner-wheel {
-    margin: 0 auto; /* Centers spinner on mobile */
-    width: 200px;
-    height: 200px;
-  }
-
-  .input-list {
-    max-width: 300px; /* Fits smaller screens */
-    order: -1;
-  }
-
-  .input-group input {
-    width: 80%; /* Allows input to adjust to screen size */
-  }
-
-  button {
-    width: 80%; /* Makes buttons fit mobile screens */
-  }
+  margin: 10% auto;
 }
 
 .input-list {
   width: 100%;
-  min-height: 500px;
+  min-height: 700px;
   max-width: 400px;
   align-items: flex-start; /* Align input list items to the top */
-  background-color:beige;
+  background-color: rgb(131, 53, 95);
   border-radius: 15px;
   padding: 0px 20px;
 }
@@ -69,66 +38,129 @@
   border-radius: 5px;
 }
 
-.spinner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.input-group input::placeholder {
+  color: gray;
+  font-style: italic;
+}
 
+.spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner-wheel {
+  width: 500px;
+  height: 500px;
+  border-radius: 50%; /* Makes it circular */
+  transform-origin: 50% 50%; /* Set the rotation center */
+  overflow: hidden;
+  border: 10px solid rgb(131, 53, 95);
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: #F87B7A;
+  color: white;
+  border-radius: 5px;
+}
+
+button:hover, #spinBtn:hover {
+  background-color: #d56666;
+}
+
+#spinBtn {
+  margin-top: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: #F87B7A;
+  color: white;
+  border-radius: 5px;
+}
+
+#addItemBtn:disabled, #spinBtn:disabled {
+  background-color: #ccc;
+}
+
+
+.winner {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: green;
+}
+
+.optionItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+}
+
+ul {
+  padding-left: 0;
+}
+
+.menuItems {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+#edit, #trash, #save {
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  font-size: 0.875rem;
+}
+
+.editInput {
+  background-color: transparent;
+  padding: 0.3rem;
+  border-radius: 5px;
+  border: transparent;
+  border-bottom: solid black;
+}
+
+
+
+@media screen and (max-width: 600px) {
+  .spinner-container {
+    flex-direction: column-reverse; /* Stacks items in reverse order */
+    gap: 1rem; /* Reduce spacing between items */
+    align-items: center; /* Center-align items */
+    text-align: center; /* Ensures text aligns properly */
+    padding: 1rem; /* Adds breathing room on small screens */
   }
-  
+
+  /* Ensures spinner appears at the top */
+  .spinner {
+    order: 0; /* Lower order makes this appear first */
+  }
+
   .spinner-wheel {
+    margin: 0 auto; /* Centers spinner on mobile */
     width: 300px;
     height: 300px;
-    border-radius: 50%; /* Makes it circular */
-    transform-origin: 50% 50%; /* Set the rotation center */
-    overflow: hidden;
-    border: 5px solid #ccc;
   }
-  
+
+  .input-list {
+    max-width: 300px; /* Fits smaller screens */
+    min-height: 300px;
+    order: -1;
+  }
+
+  .input-group input {
+    width: 80%; /* Allows input to adjust to screen size */
+  }
+
   button {
-    padding: 0.5rem 1rem;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    background-color: #F87B7A;
-    color: white;
-    border-radius: 5px;
+    width: 80%; /* Makes buttons fit mobile screens */
   }
-
-  button:hover {
-    background-color: #F87B7A;
-  }
-
-  #spinBtn {
-    margin-top: 20px;
-    padding: 0.5rem 1rem;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    background-color: #F87B7A;
-    color: white;
-    border-radius: 5px;
-  }
-  
-  #spinBtn:disabled {
-    background-color: #aaa;
-    cursor: not-allowed;
-  }
-  
-
-  .winner {
-    margin-top: 1rem;
-    font-size: 1.5rem;
-    color: green;
-  }
- 
-  .optionItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  ul {
-    padding-left: 0;
-  }
+}
