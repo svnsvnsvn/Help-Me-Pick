@@ -1,166 +1,191 @@
+/* Root Variables */
 :root {
-  background-color: rgb(44, 33, 45);
+  background-color: rgb(81, 55, 83); /* Global background color */
 }
 
+/* Universal Styles */
 * {
-  font-family: sans-serif;
+  font-family: sans-serif; /* Consistent font across all elements */
 }
 
+/* Spinner Container */
 .spinner-container {
   display: flex;
-  flex-direction: row; /* Row layout for desktops/laptops */
+  flex-direction: row; /* Default: row layout for desktops/laptops */
   align-items: flex-start; /* Aligns items to the top */
-  justify-content: space-evenly;
-  gap: 2rem;
-  max-width: 1200px; /* Prevents overly wide layout */
-  margin: 10% auto;
+  justify-content: space-evenly; /* Even spacing between child elements */
+  gap: 2rem; /* Spacing between elements */
+  max-width: 1200px; /* Constrains layout width */
+  margin: 10% auto; /* Centers container with vertical margin */
 }
 
+/* Input List */
 .input-list {
   width: 100%;
   min-height: 700px;
-  max-width: 400px;
+  max-width: 400px; /* Limits input list width */
   align-items: flex-start; /* Align input list items to the top */
-  background-color: rgb(131, 53, 95);
-  border-radius: 15px;
-  padding: 0px 20px;
+  background-color: rgb(131, 53, 95); /* Distinct background */
+  border-radius: 15px; /* Rounded corners */
+  padding: 0px 20px; /* Horizontal padding */
+  box-shadow: 20px 20px rgba(49,19,35);
 }
 
+/* Input Group */
 .input-group {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.5rem; /* Spacing between inputs */
 }
 
 .input-group input {
-  flex-grow: 1;
+  flex-grow: 1; /* Expands input to fill available space */
   padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #ccc; /* Subtle border */
+  border-radius: 5px; /* Rounded input */
 }
 
 .input-group input::placeholder {
-  color: gray;
-  font-style: italic;
+  color: gray; /* Placeholder text color */
+  font-style: italic; /* Placeholder style */
 }
 
+/* Spinner Section */
 .spinner {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column; /* Stacks spinner elements */
+  align-items: center; /* Centers content */
+  position: relative;
 }
 
 .spinner-wheel {
   width: 500px;
   height: 500px;
-  border-radius: 50%; /* Makes it circular */
-  transform-origin: 50% 50%; /* Set the rotation center */
+  border-radius: 50%; /* Circular spinner */
+  transform-origin: 50% 50%; /* Rotation center */
   overflow: hidden;
-  border: 10px solid rgb(131, 53, 95);
+  border: 25px solid rgb(131, 53, 95); /* Spinner border color */
 }
 
+.spinner-background {
+  position: absolute; /* Positioned underneath spinner */
+  width: 600px;
+  height: 600px;
+}
+
+/* Button Styles */
 button {
   padding: 0.5rem 1rem;
   font-size: 16px;
   cursor: pointer;
   border: none;
-  background-color: #F87B7A;
+  background-color: #F87B7A; /* Primary button color */
   color: white;
-  border-radius: 5px;
+  border-radius: 5px; /* Rounded button */
 }
 
-button:hover, #spinBtn:hover {
-  background-color: #d56666;
+button:hover,
+#spinBtn:hover {
+  background-color: #d56666; /* Hover effect for buttons */
 }
 
 #spinBtn {
-  margin-top: 20px;
-  padding: 0.5rem 1rem;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  background-color: #F87B7A;
-  color: white;
-  border-radius: 5px;
+  margin-top: 40px;
 }
 
-#addItemBtn:disabled, #spinBtn:disabled {
-  background-color: #ccc;
+#addItemBtn:disabled,
+#spinBtn:disabled {
+  background-color: #ccc; /* Disabled button appearance */
 }
 
-
+/* Winner Announcement */
 .winner {
   margin-top: 1rem;
   font-size: 1.5rem;
-  color: green;
+  color: green; /* Highlight winner text */
 }
 
+/* Option Item */
 .optionItem {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.5rem;
-  border-radius: 5px;
+  border-radius: 5px; /* Rounded corners */
 }
 
+/* Unordered List */
 ul {
-  padding-left: 0;
+  padding-left: 0; /* Removes default list padding */
 }
 
+/* Menu Items */
 .menuItems {
   display: flex;
   flex-direction: row;
-  gap: 0.5rem;
+  gap: 0.5rem; /* Spacing between menu items */
 }
 
-#edit, #trash, #save {
-  cursor: pointer;
+#edit,
+#trash,
+#save {
+  cursor: pointer; /* Pointer cursor for icons */
   margin: 0;
   padding: 0;
-  font-size: 0.875rem;
+  font-size: 0.875rem; /* Smaller font size */
 }
 
+/* Editable Input */
 .editInput {
-  background-color: transparent;
+  background-color: transparent; /* Transparent background */
   padding: 0.3rem;
   border-radius: 5px;
   border: transparent;
-  border-bottom: solid black;
+  border-bottom: solid black; /* Underline styling */
 }
 
+/* SVG */
+svg.spinner-background {
+  overflow: visible; /* Ensures SVG visibility */
+}
 
-
+/* Responsive Styles */
 @media screen and (max-width: 600px) {
+  /* Mobile Layout: Spinner Container */
   .spinner-container {
     flex-direction: column-reverse; /* Stacks items in reverse order */
-    gap: 1rem; /* Reduce spacing between items */
+    gap: 1rem; /* Reduced spacing for smaller screens */
     align-items: center; /* Center-align items */
-    text-align: center; /* Ensures text aligns properly */
-    padding: 1rem; /* Adds breathing room on small screens */
+    text-align: center; /* Centers text alignment */
+    padding: 1rem; /* Adds padding for mobile */
   }
 
-  /* Ensures spinner appears at the top */
   .spinner {
-    order: 0; /* Lower order makes this appear first */
+    order: 0; /* Displays spinner at the top */
   }
 
   .spinner-wheel {
-    margin: 0 auto; /* Centers spinner on mobile */
-    width: 300px;
+    margin: 0 auto; /* Centers spinner */
+    width: 300px; /* Adjusted size for mobile */
     height: 300px;
   }
 
+  .spinner-background {
+    width: 380px;
+    height: 400px;
+    padding-top: 20px;
+  }
+
   .input-list {
-    max-width: 300px; /* Fits smaller screens */
+    max-width: 300px; /* Adjust input list width for mobile */
     min-height: 300px;
-    order: -1;
+    order: -1; /* Places input list at the bottom */
   }
 
   .input-group input {
-    width: 80%; /* Allows input to adjust to screen size */
+    width: 80%; /* Input adjusts to screen size */
   }
 
   button {
-    width: 80%; /* Makes buttons fit mobile screens */
+    width: 80%; /* Buttons fit mobile screens */
   }
 }

@@ -37,43 +37,6 @@ const Spinner = () => {
   const [colorSequence, setColorSequence] = useState(shuffleArray(miffyColors));
   const colorIndexRef = useRef(0);
 
-  // const previousColorRef = useRef(null); // Ref to store the previous color
-  // const randomColor = () => {
-  //   const miffyColors = [
-  //     { red: 0.968, green: 0.839, blue: 0.776 }, // Soft Peach
-  //     { red: 0.925, green: 0.929, blue: 0.941 }, // Light Gray
-  //     { red: 0.976, green: 0.486, blue: 0.482 }, // Miffy Red
-  //     { red: 0.549, green: 0.839, blue: 0.776 }, // Soft Mint
-  //     { red: 0.949, green: 0.788, blue: 0.196 }, // Miffy Yellow
-  //     { red: 0.835, green: 0.608, blue: 0.608 }, // Dusty Rose
-  //     { red: 0.486, green: 0.686, blue: 0.776 }  // Sky Blue
-  //   ];
-
-  //   const previousColor = previousColorRef.current;
-  //   // filter the array to exclude the previous color
-  //   const availableColors = miffyColors.filter(color => {
-  //     // check if the current color matches the previous color
-  //     if (previousColor) {
-  //       return !(color.red === previousColor.red && color.green === previousColor.green && color.blue === previousColor.blue);
-  //     }
-  //     // if no previousColor is provided, include all the colors
-  //     return true;
-
-  //   });
-
-  //   // generate a randpm index within the range of the filtered array
-  //   const randomIndex = Math.floor(Math.random() * availableColors.length);
-  //   const selectedColor = availableColors[randomIndex];
-
-  //   previousColorRef.current = selectedColor;
-
-  //   // Log the previous and new colors
-  //   // console.log("Previous Color:", previousColor);
-  //   // console.log("New Color:", selectedColor);
-
-  //   return selectedColor;
-  // };
-
   const getNextColor = () => {
     // Get the next color in the sequence
     const nextColor = colorSequence[colorIndexRef.current];
@@ -110,7 +73,6 @@ const Spinner = () => {
     );
   };
 
-
   useEffect(() => {
     console.log("Updated Segments:", segments);
   }, [segments]); // Trigger whenever `segments` changes
@@ -142,6 +104,28 @@ const Spinner = () => {
       {/* Spinner Section */}
       <div className="spinner">
         <h2>Help Me Pick!</h2>
+
+        {/* Decorative SVG (Background Layer) */}
+        <svg
+          viewBox="0 0 110 110" // Slightly larger than the spinner for visual effect
+          className="spinner-background"
+          style={{
+            zIndex: 0,            // Lower z-index to place it behind the spinner
+          }}
+        >
+          {/* Example Circle for Background */}
+          <circle
+            cx="55"              // Center X-coordinate
+            cy="69"              // Center Y-coordinate
+            r="49"               // Radius (slightly smaller than the viewBox)
+            fill="rgba(49,19,35)" // Semi-transparent black for visual enhancement
+            stroke="rgba(0, 0, 0, 0.2)" // Slightly darker stroke
+            strokeWidth="1"      // Width of the border
+            className="spinner-background"
+          />
+        </svg>
+
+        {/* Main Spinner SVG (Foreground Layer) */}
         <svg
           viewBox="0 0 100 100"
           className="spinner-wheel"
@@ -175,7 +159,7 @@ const Spinner = () => {
             />
           )}
         </svg>
-        
+
         <button
           id='spinBtn'
           onClick={spin}
