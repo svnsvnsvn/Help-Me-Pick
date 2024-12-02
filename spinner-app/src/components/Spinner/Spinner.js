@@ -1,31 +1,10 @@
 import "./styles.css";
-import React, { useState, useEffect, useRef } from "react";
-import PieSegment from "./PieSegments";
-import InputListRow from "../InputList/InputListRow";
-import MenuBar from "../Menu/MenuBar";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-// uuidv4();
-
-// Define the color palette
-const miffyColors = [
-  { red: 0.968, green: 0.839, blue: 0.776 }, // Soft Peach
-  { red: 0.925, green: 0.929, blue: 0.941 }, // Light Gray
-  { red: 0.976, green: 0.486, blue: 0.482 }, // Miffy Red
-  { red: 0.549, green: 0.839, blue: 0.776 }, // Soft Mint
-  { red: 0.949, green: 0.788, blue: 0.196 }, // Miffy Yellow
-  { red: 0.835, green: 0.608, blue: 0.608 }, // Dusty Rose
-  { red: 0.486, green: 0.686, blue: 0.776 }, // Sky Blue
-];
-
-// Fisher-Yates Shuffle for randomizing color sequence
-const shuffleArray = (array) => {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-};
+import InputList from "../InputList/InputList";
+import MenuBar from "../Menu/MenuBar";
+import useColorSequence from "./useColorSequence";
+import SpinnerWheel from "./spinnerWheel";
 
 const Spinner = () => {
   const [rotationAngle, setRotationAngle] = useState(0);
@@ -34,42 +13,133 @@ const Spinner = () => {
   const [input, setInput] = useState("");
   const [segments, setSegments] = useState([]);
   const pickerAngle = 90; // Picker position at 12 o'clock
-  const [showIcons, setShowIcons] = useState(true); // Default: icons are visible
+  const [showIcons, setShowIcons] = useState(false);
+  const [chosenOptions, setChosenOptions] = useState({});
+  const [isHistoryPopupVisible, setIsHistoryPopupVisible] = useState(false);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
-  const [colorSequence, setColorSequence] = useState(shuffleArray(miffyColors));
-  const colorIndexRef = useRef(0);
+  const getNextColor = useColorSequence();
 
-  // Get the next color from the sequence
-  const getNextColor = () => {
-    const nextColor = colorSequence[colorIndexRef.current];
-    colorIndexRef.current++;
-
-    if (colorIndexRef.current >= colorSequence.length) {
-      setColorSequence(shuffleArray(miffyColors));
-      colorIndexRef.current = 0;
-    }
-
-    return nextColor;
+  /**
+   * Hides the popup by setting its visibility state to false.
+   *
+   * Functionality:
+   * 1. Updates the `isPopupVisible` state to `false`, ensuring the popup is no longer visible.
+   */
+  const handleClose = () => {
+    setIsPopupVisible(false); // Set to false to hide the popup
   };
 
+  /**
+   * Toggles the visibility of icons in the UI.
+   *
+   * Functionality:
+   * 1. Flips the `showIcons` state between `true` and `false`.
+   * 2. Can be used to show or hide additional UI elements dynamically.
+   */
   const toggleIcons = () => {
     setShowIcons((prevShowIcons) => !prevShowIcons);
   };
-  
 
+  /**
+   * Toggles the visibility of the history popup.
+   *
+   * Functionality:
+   * 1. Flips the `isHistoryPopupVisible` state between `true` and `false`.
+   * 2. Can be used to display or hide historical data in the application.
+   *
+   */
+  const toggleHistory = () => {
+    setIsHistoryPopupVisible((prev) => !prev);
+  };
+
+  /**
+   * Adds a new item to the segments array.
+   *
+   * Functionality:
+   * - Validates the `input` field to ensure it's not empty or just whitespace.
+   * - Creates a new segment object with:
+   *   - A unique ID (`uuidv4`).
+   *   - A label (from `input`).
+   *   - A color (from `getNextColor`).
+   *   - A `hidden` flag (default: `false`).
+   * - Appends the new segment to the `segments` array.
+   * - Clears the `input` field after adding the item.
+   *
+   * Alerts:
+   * - Displays an alert if the input is empty or invalid.
+   *
+   */
   const addItem = () => {
     if (!input.trim()) {
       alert("Please enter a valid item.");
       return;
     }
-    setSegments([...segments, { id: uuidv4(), label: input, color: getNextColor() }]);
+    setSegments([...segments, { id: uuidv4(), label: input, color: getNextColor(), hidden: false }]);
     setInput("");
   };
 
+  /**
+   * Removes a segment from the `segments` array based on its ID.
+   *
+   * Parameters:
+   * @param {string} id - The unique identifier of the segment to be deleted.
+   *
+   * Functionality:
+   * - Filters out the segment with the matching ID from the `segments` array.
+   * 
+   */
   const deleteItem = (id) => {
     setSegments(segments.filter((segment) => segment.id !== id));
   };
 
+  /**
+   * Toggles the visibility (hidden state) of a specific segment.
+   *
+   * Parameters:
+   * @param {string} id - The unique identifier of the segment to be toggled.
+   *
+   * Functionality:
+   * - Finds the segment with the matching ID.
+   * - Toggles its `hidden` property between `true` and `false`.
+   *
+   */
+  const handleHide = (id) => {
+    setSegments(
+      segments.map((segment) =>
+        segment.id === id ? { ...segment, hidden: !segment.hidden } : segment
+      )
+    );
+  };
+
+  /**
+   * Resets the wheel by clearing all segments and resetting the winner.
+   *
+   * Parameters:
+   * @param {Array} segments - (Optional) Current segments (not used in this implementation).
+   *
+   * Functionality:
+   * - Sets the `segments` state to an empty array.
+   * - Resets the `winner` state to `null`.
+   *
+   */
+  const resetWheel = (segments) => {
+    setSegments([]);
+    setWinner(null);
+  };
+
+  /**
+   * Edits the label of a specific segment.
+   *
+   * Parameters:
+   * @param {string} id - The unique identifier of the segment to be edited.
+   * @param {string} newLabel - The new label for the segment.
+   *
+   * Functionality:
+   * - Finds the segment with the matching ID.
+   * - Updates its `label` property to the provided `newLabel`.
+   *
+   */
   const editItem = (id, newLabel) => {
     setSegments(
       segments.map((segment) =>
@@ -82,129 +152,129 @@ const Spinner = () => {
     console.log("Updated Segments:", segments);
   }, [segments]);
 
-  const spin = () => {
-    if (isSpinning || segments.length === 0) return;
-    setIsSpinning(true);
+  useEffect(() => {
+    if (winner) {
+      setChosenOptions((prevChosenOptions) => {
+        const existingOption = prevChosenOptions[winner.label] || { count: 0, ids: [] };
 
-    const duration = Math.random() * 5 + 2; // Spin duration
-    const targetAngle = rotationAngle + 360 * 3 + Math.random() * 360;
+        // Avoid adding duplicate IDs
+        const updatedIds = existingOption.ids.includes(winner.id)
+          ? existingOption.ids
+          : [...existingOption.ids, winner.id];
 
-    setRotationAngle(targetAngle);
+        return {
+          ...prevChosenOptions,
+          [winner.label]: {
+            count: existingOption.count + 1,
+            ids: updatedIds,
+          },
+        };
+      });
+    }
+  }, [winner]);
 
-    setTimeout(() => {
-      const normalizedAngle = (targetAngle % 360 + 360) % 360; // Normalize to 0-360
-      const adjustedAngle = (360 - (normalizedAngle + pickerAngle) % 360) % 360; // Align with picker
-      const segmentAngle = 360 / segments.length;
-      const winningIndex = Math.floor(adjustedAngle / segmentAngle);
+const spin = () => {
+  const visibleSegments = segments.filter((s) => !s.hidden);
 
-      setWinner(segments[winningIndex]);
-      setTimeout(() => setIsSpinning(false), 50);
-    }, duration * 1000);
-  };
+  if (isSpinning || visibleSegments.length === 0) return; // Prevent spinning if no visible segments
+  setIsSpinning(true);
+
+  const duration = Math.random() * 5 + 2; // Spin duration
+  const targetAngle = rotationAngle + 360 * 3 + Math.random() * 360;
+
+  setRotationAngle(targetAngle);
+
+  setTimeout(() => {
+    const normalizedAngle = (targetAngle % 360 + 360) % 360; // Normalize to 0-360
+    const adjustedAngle = (360 - (normalizedAngle + pickerAngle) % 360) % 360; // Align with picker
+    
+    // Log adjustedAngle and visibleSegments for debugging
+    console.log("Adjusted Angle:", adjustedAngle);
+    console.log("Visible Segments:", visibleSegments);
+
+    const segmentAngle = 360 / visibleSegments.length; // Angle per visible segment
+    const winningIndex = Math.floor(adjustedAngle / segmentAngle);
+
+    console.log("Winning Index:", winningIndex);
+
+    setWinner(visibleSegments[winningIndex]); // Correctly pick the winner from visible segments
+    setIsPopupVisible(true);
+    setTimeout(() => setIsSpinning(false), 50);
+  }, duration * 1000);
+};
 
   return (
     <div className="spinner-container">
       <div className="spinner">
         <h2>Help Me Pick!</h2>
-
         <svg className="spinner-background" viewBox="0 0 110 110">
-          <circle cx="57.5" cy="65" r="50" fill="rgb(195,190,190)" stroke="rgb(0, 0, 0)" strokeWidth=".25" />
+          <circle cx="57.5" cy="65" r="50"/>
         </svg>
-
-        <svg className="spinner-wheel" viewBox="0 0 100 100"
-          style={{
-            transform: `rotate(${rotationAngle}deg)`,
-            transition: isSpinning ? "transform 3s cubic-bezier(0.25, 0.1, 0.25, 1)" : "none",
-          }}
-          onClick={spin}>
-        
-          {segments.length > 0 ? (
-            segments.map((segment, index) => {
-              const startAngle = (360 / segments.length) * index;
-              const endAngle = startAngle + 360 / segments.length;
-
-              return (
-                <PieSegment
-                  key={index}
-                  startAngle={startAngle}
-                  endAngle={endAngle}
-                  color={`rgb(${segment.color.red * 255}, ${segment.color.green * 255}, ${segment.color.blue * 255})`}
-                  label={segment.label}
-                />
-              );
-            })
-          ) : 
-            (<PieSegment startAngle={0} endAngle={360} color="rgb(131, 53, 95)" label="Add Item" />)}
-        </svg>
-
-        {/* <button onClick={spin} disabled={isSpinning || segments.length === 0}>
-          {isSpinning ? "Spinning..." : "Click me to spin!"}
-        </button> */}
-        {winner && (
-          <div className="winner">
-            Winner: <span style={{ color: `rgb(${winner.color.red * 255}, ${winner.color.green * 255}, ${winner.color.blue * 255})` }}>
-              {winner.label}
-            </span>
-          </div>
+        <SpinnerWheel
+          segments={segments}
+          rotationAngle={rotationAngle}
+          isSpinning={isSpinning}
+          spin={spin}
+        />
+        {winner && winner.label && (
+          <>
+            {isPopupVisible && (
+              <div className="winner popup">
+                <h3>
+                  <span style={{
+                    color: `rgb(${winner.color.red * 255}, ${winner.color.green * 255}, ${winner.color.blue * 255})`
+                  }}>
+                    {winner.label}
+                  </span>
+                </h3>
+                <div>
+                  <button onClick={() => handleHide(winner.id)}>
+                  {segments.find((segment) => segment.id === winner.id)?.hidden ? "Unhide": "Hide"}
+                  </button>
+                  <button onClick={handleClose}>Close</button>
+                </div>
+              </div>
+            )}
+          </>
         )}
       </div>
 
-      <div className="input-list">
-        <h2>Add Items</h2>
-        <div className="input-group">
-          <input
-            id="inputField"
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") addItem();
-            }}
-            placeholder="Enter item"
-          />
-          {/* <button onClick={addItem} disabled={!input.trim()}>Add</button> */}
-          <button 
-          id="addItemBtn" 
-          onClick={addItem} 
-          disabled={!input.trim()} 
-          style={{
-            border: 'none',
-            padding: 0,
-          }}
-          aria-label="Add Item"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="-10 -10 50 50"
-            width="50"
-            height="50"
-          >
-            <path d="M14.5,14.501l-10.502,0c-0.828,0 -1.5,0.673 -1.5,1.5c0,0.828 0.672,1.5 1.5,1.5l10.502,0l-0.001,10.502c0,0.828 0.672,1.5 1.5,1.501c0.828,-0 1.5,-0.673 1.5,-1.5l0.001,-10.503l10.502,0c0.828,0 1.5,-0.672 1.5,-1.5c0,-0.827 -0.672,-1.5 -1.5,-1.5l-10.502,0l0.001,-10.501c-0,-0.828 -0.672,-1.501 -1.5,-1.501c-0.828,0 -1.5,0.672 -1.5,1.5l-0.001,10.502Z"/>
-          </svg>
-        </button>
+      <InputList
+        input={input}
+        setInput={setInput}
+        segments={segments}
+        addItem={addItem}
+        deleteItem={deleteItem}
+        editItem={editItem}
+        showIcons = {showIcons}
+        handleHide={handleHide}
+      />    
+
+      <div>
+        <MenuBar toggleIcons={toggleIcons} resetWheel={resetWheel} toggleHistory={toggleHistory}/>
+      </div>
+
+      {isHistoryPopupVisible && (
+        <div className="history popup">
+
+          <div className="historyBoxHeader">
+            <h3>History</h3>
+            <p>View the selected options here.</p>
+          </div>
+          <div className="historyBoxContent">
+            <ul>
+              {Object.entries(chosenOptions).map(([option, data]) => (
+                <li key={option}>
+                  {option}: {data.count} time{data.count > 1 ? "s" : ""}
+                </li>
+              ))}
+            </ul>
+
+            <button onClick={toggleHistory}>Close</button>
+          </div>
 
         </div>
-        <ul className ="pieSlices"
-        style={{
-          border: segments.length > 0 ? '1.5px solid black' : 'none',
-          padding: '10px',
-          borderRadius: segments.length > 0 ? '10px' : '0',
-        }}>
-          {segments.map((segment) => (
-            <InputListRow
-              key={segment.id}
-              segment={segment}
-              deleteItem={deleteItem}
-              editItem={editItem}
-              showIcons={showIcons}
-            />
-          ))}
-        </ul>
-      </div>
-      <div>
-        <MenuBar toggleIcons={toggleIcons}></MenuBar>
-      </div>
-      
+      )}
     </div>
   );
 };

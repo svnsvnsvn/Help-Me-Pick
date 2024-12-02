@@ -1,5 +1,55 @@
 .optionItem {
-    background-color: rgba(128, 128, 128, 0.252);
+    background-color: rgba(213, 208, 208, 0.252);
     margin: 10px 0px;
     padding: 10px;
 }
+
+.optionItem span {
+    transition: color 0.3s, text-decoration 0.3s;
+  }
+  
+.optionItem span.hidden {
+color: rgb(58, 55, 55);
+text-decoration: line-through;
+opacity: 0.6;
+}
+  
+.optionItem button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: flex-start;
+    transition: transform 0.2s ease; /* Adds a slight hover effect */
+  }
+
+  .editItems {
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+  }
+  .editItems button svg {
+    width: 35px; /* Adjust to match the reference */
+    height: 35px;
+    fill: #000000; /* Icon color */
+    transition: fill 0.2s ease, transform 0.2s ease; /* Smooth hover effects */
+  }
+  
+  .editItems button:hover svg {
+    fill: #ff628e; /* Darker shade on hover */
+    transform: scale(1.1); /* Slight zoom effect */
+  }
+  
+  button:active svg {
+    transform: scale(0.95); /* Slight shrink on click */
+  }
+
+  /* Adjust spacing between buttons */
+button + button {
+    margin-left: 0px; /* Reduced space between buttons */
+    margin-right: 0px; /* Reduced space between buttons */
+  }
+  

@@ -1,6 +1,6 @@
 /* Root Variables */
 :root {
-  background-color: rgb(227, 222, 228); /* Global background color */
+  background: rgba(236, 233, 224, 1);
 }
 
 /* Universal Styles */
@@ -87,14 +87,24 @@
   border-radius: 50%; /* Circular spinner */
   transform-origin: 50% 50%; /* Rotation center */
   overflow: hidden;
-  border: 25px solid rgb(255, 255, 255); /* Spinner border color */
-  outline: 1.5px solid rgb(0, 0, 0); /* Additional border */
+  border: 25px solid rgba(64, 37, 10, 1); /* Spinner border color */
+  outline: 1.5px solid rgba(59, 30, 10, 1); /* Additional border */
 }
 
 .spinner-background {
   position: absolute; /* Positioned underneath spinner */
   width: 600px;
   height: 600px;
+  
+}
+
+.spinner-background circle {
+  width: 636.646px;
+  height: 636.646px;
+  border-radius: 636.646px;
+  border: 0.5px solid rgba(59, 30, 10, 1);
+  fill: rgba(157, 142, 130, 1);
+  flex-shrink: 0;
 }
 
 /* Button Styles */
@@ -108,8 +118,6 @@
   border-radius: 5px; 
   margin: 0px;
 } */
-
-
 
 /* #spinBtn {
   margin-top: 40px;
@@ -132,12 +140,7 @@
   background-color: #d56666; 
 } */
 
-/* Winner Announcement */
-.winner {
-  margin-top: 1rem;
-  font-size: 1.5rem;
-  color: rgb(255, 161, 60); 
-}
+
 
 /* Option Item */
 .optionItem {
@@ -151,6 +154,116 @@
 /* Unordered List */
 ul {
   padding-left: 0;
+  list-style-type: none;
+}
+
+/* Winner Announcement */
+.winner {
+  margin-top: 1rem;
+  font-size: 2.5rem;
+  color: rgb(0, 0, 0); 
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1.5px solid black;
+  border-radius: 10px;
+  z-index: 1000;
+  width:300px;
+  height: 300px;
+}
+.popup button {
+  margin-top: 10px;
+}
+
+.winner.popup {
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  display: flex; /* Enables flexbox */
+  flex-direction: column;
+  justify-content: center; /* Centers items horizontally */
+  align-items: center; /* Centers items vertically */
+  height: 300px; /* Ensure the height of the container */
+}
+
+.winner.popup.hidden {
+  opacity: 0;
+  pointer-events: none; /* Optional: Makes it unclickable */
+}
+
+/* .history li {
+  border-top: dashed black;
+  margin: 10px 0px;
+  padding-top: 10px;
+} */
+
+/* .history {
+  background-color: #f9fbfc; 
+  border: 1px solid #d9e2ec; 
+  border-radius: 10px; 
+  padding: 15px;
+  font-family: Arial, sans-serif; 
+  color: #486581; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
+
+.history {
+  background-color: white; /* Light background */
+  border: 1px solid #000000; /* Subtle border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 15px;
+  font-family: Arial, sans-serif; /* Use a clean font */
+  color: #000000; /* Softer text color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+.history h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.history p {
+  font-size: 14px;
+  color: #000000; /* Softer text for paragraph */
+}
+
+.history li {
+  border-top: 1px dashed #000000; /* Light dashed border */
+  margin: 8px 0;
+  padding-top: 8px;
+  list-style: none; /* Remove bullet points */
+  overflow: scroll;
+  max-height: 200px;
+
+}
+
+.history ul {
+  padding: 0;
+  margin: 0;
+}
+
+.history button {
+  background-color: #e3effe; /* Subtle button background */
+  color: #000000; /* Matching text color */
+  border: 1px solid #cbd6e0;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.history button:hover {
+  background-color: #d1e6f9; /* Slight hover effect */
+}
+
+.historyBoxHeader {
+  margin: 0px;
 }
 
 /* Menu Items */
