@@ -1,0 +1,35 @@
+.menu {
+    background-color: white;
+    border-radius: 50px;
+    border: 1.5px solid black;
+    box-shadow: 12px 8px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    width: 60px; /* Adjust width if necessary for button spacing */
+    display: flex; /* Flexbox to align content */
+    flex-direction: column; /* Stack SVGs vertically */
+    align-items: center; /* Center SVGs horizontally */
+    justify-content: center;
+}
+
+.menu svg {
+    width: 50px;
+    height: 50px;
+    cursor: pointer; /* Adds pointer cursor for interactivity */
+    transition: transform 0.2s ease; /* Smooth scaling on hover */
+}
+
+.menu svg:hover {
+    transform: scale(1.1); /* Slight enlargement on hover */
+    fill: orange;
+}
+
+.menu button {
+    all: unset; /* Removes default button styles */
+    display: flex; /* Ensures buttons properly wrap SVGs */
+    align-items: center;
+    justify-content: center;
+    width: 60px; /* Ensure buttons align with menu width */
+    height: 60px; /* Consistent button height */
+    margin-bottom: 5px; /* Add spacing between buttons */
+    border-radius: 10px; /* Optional for rounded button edges */
+}

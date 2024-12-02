@@ -1,6 +1,6 @@
 /* Root Variables */
 :root {
-  background-color: rgb(81, 55, 83); /* Global background color */
+  background-color: rgb(227, 222, 228); /* Global background color */
 }
 
 /* Universal Styles */
@@ -25,23 +25,47 @@
   min-height: 700px;
   max-width: 400px; /* Limits input list width */
   align-items: flex-start; /* Align input list items to the top */
-  background-color: rgb(131, 53, 95); /* Distinct background */
+  background-color: rgb(255, 255, 255); /* Distinct background */
   border-radius: 15px; /* Rounded corners */
-  padding: 0px 20px; /* Horizontal padding */
-  box-shadow: 20px 20px rgba(49,19,35);
+  padding: 0px 25px; /* Horizontal padding */
+  box-shadow: 15px 15px rgba(0, 0, 0, 0.5);
+  outline: 1.5px solid rgb(0, 0, 0); /* Additional border */
+}
+
+/* Pie slices in the input list */
+.pieSlices {
+  border-radius: 10px;
+  border: 1.5px solid black;
+  padding: 10px;
+  max-height: 500px;
+  overflow: scroll;
 }
 
 /* Input Group */
 .input-group {
   display: flex;
-  gap: 0.5rem; /* Spacing between inputs */
+  /* gap: 0.5rem; Spacing between inputs */
+  border-radius: 10px;
+  border: 1.5px solid black;
+  max-height: 100px;
 }
+
 
 .input-group input {
   flex-grow: 1; /* Expands input to fill available space */
   padding: 0.5rem;
   border: 1px solid #ccc; /* Subtle border */
   border-radius: 5px; /* Rounded input */
+}
+
+#inputField {
+  margin: 10px;
+  border: none;
+}
+
+#inputField:focus {
+  border: none;
+  outline: none;
 }
 
 .input-group input::placeholder {
@@ -63,7 +87,8 @@
   border-radius: 50%; /* Circular spinner */
   transform-origin: 50% 50%; /* Rotation center */
   overflow: hidden;
-  border: 25px solid rgb(131, 53, 95); /* Spinner border color */
+  border: 25px solid rgb(255, 255, 255); /* Spinner border color */
+  outline: 1.5px solid rgb(0, 0, 0); /* Additional border */
 }
 
 .spinner-background {
@@ -73,35 +98,45 @@
 }
 
 /* Button Styles */
-button {
+/* button {
   padding: 0.5rem 1rem;
   font-size: 16px;
   cursor: pointer;
   border: none;
-  background-color: #F87B7A; /* Primary button color */
+  background-color: #F87B7A;
   color: white;
-  border-radius: 5px; /* Rounded button */
-}
+  border-radius: 5px; 
+  margin: 0px;
+} */
 
-button:hover,
-#spinBtn:hover {
-  background-color: #d56666; /* Hover effect for buttons */
-}
 
-#spinBtn {
+
+/* #spinBtn {
   margin-top: 40px;
-}
+} */
 
 #addItemBtn:disabled,
 #spinBtn:disabled {
-  background-color: #ccc; /* Disabled button appearance */
+  background-color: #ccc;
+  fill: rgb(111, 108, 108);
 }
+
+#addItemBtn{
+  background-color: pink;
+  width: 70px;
+  border-radius: 0px 10px 10px 0px; /* Top-right, Bottom-right, Bottom-left, Top-left */
+}
+
+/*fix foloring*/
+/* #addItemBtn:hover {
+  background-color: #d56666; 
+} */
 
 /* Winner Announcement */
 .winner {
   margin-top: 1rem;
   font-size: 1.5rem;
-  color: green; /* Highlight winner text */
+  color: rgb(255, 161, 60); 
 }
 
 /* Option Item */
@@ -110,28 +145,29 @@ button:hover,
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.5rem;
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 5px; 
 }
 
 /* Unordered List */
 ul {
-  padding-left: 0; /* Removes default list padding */
+  padding-left: 0;
 }
 
 /* Menu Items */
+/*TODO: PLEASE FIX THE ICONS. THEY WILL NO LONGER BE ON EACH ITEM BY DEFAUKT, BUT INSTEAD TOGGLED ON A MENU*/
 .menuItems {
   display: flex;
   flex-direction: row;
-  gap: 0.5rem; /* Spacing between menu items */
+  gap: 0.5rem; 
 }
 
 #edit,
 #trash,
 #save {
-  cursor: pointer; /* Pointer cursor for icons */
+  cursor: pointer; 
   margin: 0;
   padding: 0;
-  font-size: 0.875rem; /* Smaller font size */
+  font-size: 0.875rem;
 }
 
 /* Editable Input */

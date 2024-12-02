@@ -1,6 +1,7 @@
+import "./styles.css";
 import React, { useState } from "react";
 
-const InputListRow = ({ segment, deleteItem, editItem }) => {
+const InputListRow = ({ segment, deleteItem, editItem, showIcons }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editInput, setEditInput] = useState(segment.label);
 
@@ -39,24 +40,27 @@ const InputListRow = ({ segment, deleteItem, editItem }) => {
         </span>
       )}
 
-      <div className="menuItems">
-        {isEditing ? (
-          // Show "Save" button in edit mode
-          <p id="save" onClick={handleSave}>
-            Save
+<div className="menuItems">
+  {isEditing ? (
+    <p id="save" onClick={handleSave}>
+      Save
+    </p>
+  ) : (
+    <>
+      {showIcons && ( // Conditionally render icons based on showIcons
+        <>
+          <p id="edit" onClick={handleEdit}>
+            ✍🏾
           </p>
-        ) : (
-          // Show "Edit" and "Delete" buttons in display mode
-          <>
-            <p id="edit" onClick={handleEdit}>
-              ✍🏾
-            </p>
-            <p id="trash" onClick={() => deleteItem(segment.id)}>
-              🗑️
-            </p>
-          </>
-        )}
-      </div>
+          <p id="trash" onClick={() => deleteItem(segment.id)}>
+            🗑️
+          </p>
+        </>
+      )}
+    </>
+  )}
+</div>
+
     </div>
   );
 };
