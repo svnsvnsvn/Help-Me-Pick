@@ -1,4 +1,4 @@
-import "./styles.css";
+import styles from "./InputList.module.css";
 import React, { useState } from "react";
 
 const InputListRow = ({ segment, deleteItem, editItem, showIcons, handleHide }) => {
@@ -19,7 +19,7 @@ const InputListRow = ({ segment, deleteItem, editItem, showIcons, handleHide }) 
   };
 
   return (
-    <div className="optionItem">
+    <div className= {styles.optionItem}>
       {isEditing ? (
         // Editing Mode
         <input
@@ -27,16 +27,16 @@ const InputListRow = ({ segment, deleteItem, editItem, showIcons, handleHide }) 
           value={editInput}
           onChange={(e) => setEditInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSave()} // Save on Enter
-          className="editInput"
+          className= {styles.editInput}
 
         />
       ) : (
         // Display Mode
         <span
-          className={`segmentLabel ${segment.hidden ? "hidden" : ""}`}
+          className={`${segment.hidden ? `${styles.hidden}` : ""}`}
           onClick={() => !isEditing && handleHide(segment.id)} // Only toggle hidden state if not editing
           style={{
-            color: `rgb(${segment.color.red * 255}, ${segment.color.green * 255}, ${segment.color.blue * 255})`,
+            color: segment.hidden ? "black":`rgb(${segment.color.red * 255}, ${segment.color.green * 255}, ${segment.color.blue * 255})`,
             textDecoration: segment.hidden ? "line-through" : "none", cursor: "pointer",
           }}
         >
@@ -44,11 +44,11 @@ const InputListRow = ({ segment, deleteItem, editItem, showIcons, handleHide }) 
         </span>
       )}
 
-      <div className="editItems">
+      <div className= {styles.editItems}>
         {isEditing ? (
-          <p id="save" onClick={handleSave}>
+          <button id="save" onClick={handleSave}>
             Save
-          </p>
+          </button>
         ) : (
           <>
             {showIcons && ( // Conditionally render icons based on showIcons

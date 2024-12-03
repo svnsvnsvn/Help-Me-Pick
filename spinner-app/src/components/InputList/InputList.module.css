@@ -1,0 +1,155 @@
+@import '../../styles/variables.css';
+
+/* General Styles */
+button:active svg {
+  transform: scale(0.95); /* Slight shrink on click */
+}
+
+/* Option Item */
+.optionItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--tertiary-color);
+  margin: 10px 0px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.optionItem span {
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+.optionItem span.hidden {
+  color: rgb(58, 55, 55);
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.optionItem button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease; /* Hover effect */
+}
+
+/* Edit Items */
+.editItems {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+}
+
+.editItems button svg {
+  width: 35px;
+  height: 35px;
+  fill: #000000; /* Icon color */
+  transition: fill 0.2s ease, transform 0.2s ease; /* Smooth hover effects */
+}
+
+.editItems button:hover svg {
+  fill: #ff628e; /* Darker shade on hover */
+  transform: scale(1.1); /* Slight zoom effect */
+}
+
+/* Adjust spacing between buttons */
+button + button {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+/* Input List */
+.inputList {
+  width: 100%;
+  min-height: 700px;
+  max-width: 400px; /* Limits input list width */
+  align-items: flex-start; /* Align items to the top */
+  background-color: var(--secondary-color); /* Distinct background */
+  border-radius: 25px; /* Rounded corners */
+  padding: 0px 25px; /* Horizontal padding */
+  box-shadow: 15px 15px var(--drop-shadow-color);
+  outline: 1.5px solid rgb(0, 0, 0); /* Additional border */
+}
+
+/* Pie Slices in the Input List */
+.pieSlices {
+  border-radius: 15px;
+  border: 1.5px solid black;
+  padding: 10px;
+  max-height: 500px;
+  overflow: scroll;
+}
+
+/* Input Group */
+.input-group {
+  display: flex;
+  border-radius: 15px;
+  border: 1.5px solid var(--border-color);
+  max-height: 100px;
+}
+
+.input-group input {
+  flex-grow: 1; /* Expands input to fill available space */
+  padding: 0.5rem;
+  border-radius: 12px 0px 0px 12px; /* Rounded input*/
+  border: none;
+  background-color: var(--tertiary-color);
+  display: flex;
+  width: 378.142px;
+  padding: 16px 14px;
+  /* background: transparent; */
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.input-group input::placeholder {
+  color: var(--primary-color);
+  font-style: italic; 
+  font-size: medium;
+}
+
+#inputField {
+  margin: 10px;
+  border: none;
+}
+
+.input-group input:focus {
+  border: none;
+  outline: none;
+}
+
+/* Button Styles */
+button:disabled {
+  background-color: var(--primary-color);
+  cursor:not-allowed;
+}
+
+button {
+  background-color: var(--quaternary-color);
+  border-radius: 0px 10px 10px 0px; /* Top-right, Bottom-right, Bottom-left, Top-left */
+  fill: var(--secondary-color);
+  cursor: pointer;
+}
+
+/* Editable Input */
+.editInput {
+  background-color: transparent; /* Transparent background */
+  padding: 0px;
+  border-radius: 5px;
+  border: transparent;
+  border-bottom: solid black; /* Underline styling */
+}
+
+/* Action Buttons */
+#edit,
+#trash,
+#save {
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  font-size: 0.875rem;
+}

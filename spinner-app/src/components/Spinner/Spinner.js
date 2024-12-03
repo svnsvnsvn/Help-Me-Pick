@@ -1,4 +1,4 @@
-import "./styles.css";
+import styles from "./Spinner.module.css"
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import InputList from "../InputList/InputList";
@@ -204,10 +204,10 @@ const spin = () => {
 };
 
   return (
-    <div className="spinner-container">
-      <div className="spinner">
+    <div className={styles.spinnerContainer}>
+      <div className={styles.spinner}>
         <h2>Help Me Pick!</h2>
-        <svg className="spinner-background" viewBox="0 0 110 110">
+        <svg className={styles.spinnerBackground} viewBox="0 0 110 110">
           <circle cx="57.5" cy="65" r="50"/>
         </svg>
         <SpinnerWheel
@@ -219,7 +219,7 @@ const spin = () => {
         {winner && winner.label && (
           <>
             {isPopupVisible && (
-              <div className="winner popup">
+              <div className={`${styles.winner} ${styles.popup}`}>
                 <h3>
                   <span style={{
                     color: `rgb(${winner.color.red * 255}, ${winner.color.green * 255}, ${winner.color.blue * 255})`
@@ -227,11 +227,11 @@ const spin = () => {
                     {winner.label}
                   </span>
                 </h3>
-                <div>
+                <div className={styles.winnerBtns}>
                   <button onClick={() => handleHide(winner.id)}>
-                  {segments.find((segment) => segment.id === winner.id)?.hidden ? "Unhide": "Hide"}
+                  {segments.find((segment) => segment.id === winner.id)?.hidden ? "Unhide Choice": "Hide Choice"}
                   </button>
-                  <button onClick={handleClose}>Close</button>
+                  <button onClick={handleClose}>Done</button>
                 </div>
               </div>
             )}
@@ -255,22 +255,23 @@ const spin = () => {
       </div>
 
       {isHistoryPopupVisible && (
-        <div className="history popup">
+        <div className={`${styles.history} ${styles.popup}`}>
 
-          <div className="historyBoxHeader">
+          <div className={styles.historyBoxHeader}>
+
             <h3>History</h3>
             <p>View the selected options here.</p>
           </div>
-          <div className="historyBoxContent">
+          <div className= {styles.historyBoxContent}>
             <ul>
               {Object.entries(chosenOptions).map(([option, data]) => (
-                <li key={option}>
+                <li key={option}> 
                   {option}: {data.count} time{data.count > 1 ? "s" : ""}
                 </li>
               ))}
             </ul>
 
-            <button onClick={toggleHistory}>Close</button>
+            {/* <button onClick={toggleHistory}>Close</button> */}
           </div>
 
         </div>

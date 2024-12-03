@@ -1,0 +1,37 @@
+/* variables.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap');
+
+:root {
+
+  --primary-color: rgba(64, 37, 10, 1); /* Brown color from spinner */
+  --secondary-color: rgba(241, 230, 213, 1); /* Beige color from background */
+  --tertiary-color: rgba(216, 207, 198, 1); /* Tannish color under each option in the list*/
+  --quaternary-color: rgba(109, 57, 21, 1); /* Button Colors*/
+  --accent-color: #E66A6A; /* Red (heart) hover effects */
+  --background-light: rgba(236, 233, 224, 1); /* Overall background */
+  --font-dark: #4A403A; /* Dark text */
+  --font-light: #FFFFFF; /* Light text */
+
+  /* Typography */
+  --font-family: 'Reem Kufi', sans-serif;
+  --font-size-small: 16px;
+  --font-size-base: 18px;
+  --font-size-large: 24px;
+
+  /* Spacing */
+  --spacing-small: 8px;
+  --spacing-medium: 16px;
+  --spacing-large: 24px;
+
+  /* Shadow */
+  --drop-shadow-color: rgba(157, 142, 130, 1);
+
+  /* Borders */
+  --border-size-small: 0.5px;
+  --border-size-medium: 1.0px;
+  --border-size-big: 1.5px;
+  --border-color: rgba(59, 30, 10, 1);
+  --border-radius: 10px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

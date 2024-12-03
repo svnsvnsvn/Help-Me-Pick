@@ -1,0 +1,6 @@
+@import './variables.css';
+
+:root {
+    background-color: var(--background-light);
+    font-family: var(--font-family);
+}

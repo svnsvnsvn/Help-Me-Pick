@@ -1,9 +1,9 @@
-import "./styles.css";
+import styles from "./MenuBar.module.css";
 import React from "react";
 
 const MenuBar = ({ toggleIcons, resetWheel, toggleHistory }) => {
   return (
-    <div className="menu">
+    <div className={styles.menu}>
       <button
         style={{ background: "none", border: "none", cursor: "pointer" }}
         aria-label="Audio Settings Button"

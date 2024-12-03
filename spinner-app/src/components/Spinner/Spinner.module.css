@@ -1,0 +1,253 @@
+/* Spinner Container */
+.spinnerContainer {
+  display: flex;
+  flex-direction: row; 
+  align-items: flex-start; 
+  justify-content: space-evenly; 
+  gap: 3rem; /* Spacing between elements */
+  max-height: fit-content;
+  min-width: fit-content;
+  max-width: 1200px; /* Constrains layout width */
+  margin: 10% auto; /* Centers container with vertical margin */
+}
+
+/* Spinner Section */
+.spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.spinnerWheel {
+  width: 500px;
+  height: 500px;
+  border-radius: 50%; 
+  transform-origin: 50% 50%; /* Rotation center */
+  overflow: hidden;
+  border: 25px solid var(--primary-color); /* Spinner border color */
+  outline: var(--border-size-big) solid var(--border-color); /* Additional border */
+}
+
+.spinnerBackground {
+  position: absolute; /* Positioned underneath spinner */
+  width: 600px;
+  height: 600px;
+}
+
+svg.spinnerBackground {
+  overflow: visible; /* Ensures SVG visibility */
+}
+
+.spinnerBackground circle {
+  width: 636.646px;
+  height: 636.646px;
+  border-radius: 636.646px;
+  border: var(--border-size-small) solid var(--border-color);
+  fill: var(--drop-shadow-color);
+  flex-shrink: 0;
+}
+
+.popup {
+  /* align-self: stretch; */
+  font-size: var(--font-size-base);
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--primary-color);
+  /* position: fixed; */
+  /* top: 50%;
+  left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  background-color: var(--secondary-color);
+  padding: 20px;
+  border: var(--border-size-big) solid var(--border-color);
+  border-radius: var(--border-radius);
+  z-index: 1000;
+  box-shadow: 15px 15px 24.5px var(--drop-shadow-color);
+}
+
+
+/* .popup {
+  /* align-self: stretch; 
+  font-size: var(--font-size-base);
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--primary-color);
+  /* position: fixed; 
+  /* top: 50%;
+  left: 50%; 
+  /* transform: translate(-50%, -50%); 
+  background-color: var(--secondary-color);
+  padding: 20px;
+  border: var(--border-size-big) solid var(--border-color);
+  border-radius: var(--border-radius);
+  z-index: 1000;
+  box-shadow: 15px 15px 24.5px var(--drop-shadow-color);
+} */
+
+.history.popup {
+  font-size: var(--font-size-base);
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--primary-color);
+  min-width: fit-content;
+  /* position: fixed; */
+  /* top: 50%;
+  left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  background-color: var(--secondary-color);
+  padding: 20px;
+  border: var(--border-size-big) solid var(--border-color);
+  border-radius: var(--border-radius);
+  z-index: 1000;
+  box-shadow: 15px 15px var(--drop-shadow-color);
+
+}
+
+  
+/* Winner Announcement */
+.winner {
+  margin-top: 1rem;
+  font-size: 2.5rem;
+  font-weight: 400;
+
+  font-size: 40px;
+  font-style: normal;
+  line-height: normal;
+}
+
+.winner.popup {
+
+  position: fixed;
+  top: 50%;
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  display: flex; 
+  flex-direction: column;
+  justify-content: center; 
+  justify-content: stretch;
+  align-items: center; 
+  padding: 10px;
+  min-width: 410.787px;
+  max-height: fit-content;
+  flex-shrink: 0;
+}
+
+.winner.popup.hidden {
+  opacity: 0;
+  pointer-events: none; 
+}
+
+.winnerBtns {
+  margin: 0;
+  display: flex;
+  border: none;
+  align-items: center;
+  gap: 20px;
+}
+
+ .winner.popup button {
+  background: var(--quaternary-color);
+  color: var(--secondary-color);
+  border-radius: 15px;
+  border: none;
+  padding: 10px 15px;
+  font-size: 24px;
+  width: fit-content;
+  height: 60px;
+  align-items: center;
+
+} 
+
+.history h3 {
+  font-size: var(--font-size-big);
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.history p {
+  font-size: var(--font-size-medium);
+}
+
+.history li {
+  font-size: var(--font-size-big);
+  border-top: 1px dashed var(--border-color); /* Light dashed border */
+  margin: 12px 0;
+  padding-top: 12px;
+  list-style: none;
+  overflow: scroll;
+  max-height: 200px;
+}
+
+.history ul {
+  padding: 0;
+  margin: 0;
+}
+
+.history button {
+  background-color: var(--quaternary-color); /* Subtle button background */
+  color: var(--secondary-color); /* Matching text color */
+  border: var(--border-size-medium) solid var(--border-color);
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.history button:hover {
+  background-color: #d1e6f9; /* Slight hover effect */
+}
+
+.historyBoxHeader {
+  margin: 0px;
+}
+
+
+
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+  /* Mobile Layout: Spinner Container */
+  .spinner-container {
+    flex-direction: column-reverse; /* Stacks items in reverse order */
+    gap: 1rem; /* Reduced spacing for smaller screens */
+    align-items: center; /* Center-align items */
+    text-align: center; /* Centers text alignment */
+    padding: 1rem; /* Adds padding for mobile */
+  }
+
+  .spinner {
+    order: 0; /* Displays spinner at the top */
+  }
+
+  .spinnerWheel {
+    margin: 0 auto; /* Centers spinner */
+    width: 300px; /* Adjusted size for mobile */
+    height: 300px;
+  }
+
+  .spinnerBackground {
+    width: 380px;
+    height: 400px;
+    padding-top: 20px;
+  }
+
+  .input-list {
+    max-width: 300px; /* Adjust input list width for mobile */
+    min-height: 300px;
+    order: -1; /* Places input list at the bottom */
+  }
+
+  .input-group input {
+    width: 80%; /* Input adjusts to screen size */
+  }
+
+  button {
+    width: 80%; /* Buttons fit mobile screens */
+  }
+}

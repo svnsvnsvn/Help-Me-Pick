@@ -1,11 +1,12 @@
+import styles from "./InputList.module.css"
 import React from "react"
 import InputListRow from "./InputListRow"
 
 const InputList = ({input, setInput, segments, addItem, deleteItem, editItem, showIcons, handleHide}) => {
     return (
-        <div className="input-list">
+        <div className={styles.inputList}>
             <h2>Add Items</h2>
-            <div className="input-group">
+            <div className={styles['input-group']}>
                 <input
                   id = "inputField"
                   type = "text"
@@ -14,7 +15,7 @@ const InputList = ({input, setInput, segments, addItem, deleteItem, editItem, sh
                   onKeyDown={(e) => {
                     if (e.key === "Enter") addItem();
                   }}
-                  placeholder="Enter item"
+                  placeholder="Enter your options here!"
                 />
                 <button id = "addItemBtn" onClick={addItem} disabled={!input.trim()}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 50 50" width="50" height="50">
@@ -23,7 +24,7 @@ const InputList = ({input, setInput, segments, addItem, deleteItem, editItem, sh
                 </svg>
                 </button>
             </div>
-            <ul className="pieSlices" style={
+            <ul className= {styles.pieSlices} style={
                 {
                     border: segments.length > 0 ? '1.5px solid black' : 'none',
                     padding: '10px',

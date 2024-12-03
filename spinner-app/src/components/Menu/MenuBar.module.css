@@ -1,8 +1,8 @@
 .menu {
-    background-color: white;
-    border-radius: 50px;
+    background-color: var(--secondary-color);
+    border-radius: 75px;
     border: 1.5px solid black;
-    box-shadow: 12px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 12px 8px var(--drop-shadow-color);;
     padding: 10px;
     width: 60px; /* Adjust width if necessary for button spacing */
     display: flex; /* Flexbox to align content */
@@ -14,13 +14,13 @@
 .menu svg {
     width: 50px;
     height: 50px;
-    cursor: pointer; /* Adds pointer cursor for interactivity */
+    cursor: pointer;
     transition: transform 0.2s ease; /* Smooth scaling on hover */
 }
 
 .menu svg:hover {
     transform: scale(1.1); /* Slight enlargement on hover */
-    fill: orange;
+    fill: var(--accent-color);
 }
 
 .menu button {

@@ -1,5 +1,5 @@
 import {useRef, useState} from 'react';
-import {shuffleArray, miffyColors} from './utils'
+import {shuffleArray, miffyColors} from '../utils/utils'
 
 /**
  * 

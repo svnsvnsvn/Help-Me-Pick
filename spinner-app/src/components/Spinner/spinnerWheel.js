@@ -1,3 +1,4 @@
+import styles from "./Spinner.module.css"
 import React from "react";
 import PieSegment from "./pieSegments";
 
@@ -12,7 +13,7 @@ const SpinnerWheel = ({ segments, rotationAngle, isSpinning, spin }) => {
 
     return (
         <svg
-            className="spinner-wheel"
+            className={styles.spinnerWheel}
             viewBox="0 0 100 100"
             style={{
                 transform: `rotate(${rotationAngle}deg)`,
@@ -35,7 +36,7 @@ const SpinnerWheel = ({ segments, rotationAngle, isSpinning, spin }) => {
                     );
                 })
             ) : (
-                <PieSegment startAngle={0} endAngle={360} color="rgb(131, 53, 95)" label="Add Item" />
+                <PieSegment startAngle={0} endAngle={360} color="var(--secondary-color)" label="Add Item" />
             )}
         </svg>
     );
