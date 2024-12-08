@@ -6,7 +6,7 @@ const InputList = ({input, setInput, segments, addItem, deleteItem, editItem, sh
     return (
         <div className={styles.inputList}>
             <h2>Add Items</h2>
-            <div className={styles['input-group']}>
+            <div className={styles.inputGroup}>
                 <input
                   id = "inputField"
                   type = "text"
@@ -26,9 +26,10 @@ const InputList = ({input, setInput, segments, addItem, deleteItem, editItem, sh
             </div>
             <ul className= {styles.pieSlices} style={
                 {
-                    border: segments.length > 0 ? '1.5px solid black' : 'none',
+                    border: segments.length > 0 ? '1.5px solid var(--border-color)' : 'none',
                     padding: '10px',
-                    borderRadius: segments.length > 0 ? '10px' : '0',
+                    borderRadius: segments.length > 0 ? '15px' : '0',
+                    background: segments.length === 0 ? 'none' : 'var(--bg-tertiary)',
                 }
             }
             >

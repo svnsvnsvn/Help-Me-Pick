@@ -1,169 +1,147 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wheel {
+  justify-content: flex-start;
+}
 /* Spinner Container */
 .spinnerContainer {
   display: flex;
-  flex-direction: row; 
-  align-items: flex-start; 
-  justify-content: space-evenly; 
-  gap: 3rem; /* Spacing between elements */
-  max-height: fit-content;
-  min-width: fit-content;
-  max-width: 1200px; /* Constrains layout width */
-  margin: 10% auto; /* Centers container with vertical margin */
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  gap: 3rem;
+  max-width: min-content; 
+  max-height: min-content;
+  margin: 5% auto; 
+  padding: 0 1rem;
+  width: 90%;
 }
 
 /* Spinner Section */
+.title {
+  background-color: var(--secondary); 
+  border-radius: 75px;
+  border: 1.5px solid var(--border-color);
+  padding: 10px;
+  margin: 0;
+  width: 400px;
+  box-shadow: 10px 10px var(--drop-shadow-color);
+  text-align: center;
+  z-index: 100;
+}
+
 .spinner {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
+  object-fit: contain;
 }
 
 .spinnerWheel {
   width: 500px;
   height: 500px;
-  border-radius: 50%; 
-  transform-origin: 50% 50%; /* Rotation center */
+  position: relative;
+  border-radius: 50%;
+  transform-origin: center;
   overflow: hidden;
-  border: 25px solid var(--primary-color); /* Spinner border color */
-  outline: var(--border-size-big) solid var(--border-color); /* Additional border */
+  border: 25px solid var(--primary);
+  outline: var(--border-size-big) solid var(--border-color);
 }
 
 .spinnerBackground {
-  position: absolute; /* Positioned underneath spinner */
-  width: 600px;
-  height: 600px;
+  position: absolute;
+  width: 60vw; /* Scales with the screen width */
+  height: 60vw;
+  max-width: 600px; /* Restrict maximum size for larger screens */
+  max-height: 600px;
+  top: 0;
+  left: 0;
+  margin: 0;
+  margin: auto;
 }
 
 svg.spinnerBackground {
-  overflow: visible; /* Ensures SVG visibility */
+  overflow: visible;
 }
 
 .spinnerBackground circle {
   width: 636.646px;
   height: 636.646px;
-  border-radius: 636.646px;
+  border-radius: 50%;
   border: var(--border-size-small) solid var(--border-color);
   fill: var(--drop-shadow-color);
   flex-shrink: 0;
 }
 
+/* Popup Styles */
 .popup {
-  /* align-self: stretch; */
   font-size: var(--font-size-base);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  color: var(--primary-color);
-  /* position: fixed; */
-  /* top: 50%;
-  left: 50%; */
-  /* transform: translate(-50%, -50%); */
-  background-color: var(--secondary-color);
+  color: var(--primary);
+  background-color: var(--secondary);
   padding: 20px;
   border: var(--border-size-big) solid var(--border-color);
-  border-radius: var(--border-radius);
-  z-index: 1000;
-  box-shadow: 15px 15px 24.5px var(--drop-shadow-color);
-}
-
-
-/* .popup {
-  /* align-self: stretch; 
-  font-size: var(--font-size-base);
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  color: var(--primary-color);
-  /* position: fixed; 
-  /* top: 50%;
-  left: 50%; 
-  /* transform: translate(-50%, -50%); 
-  background-color: var(--secondary-color);
-  padding: 20px;
-  border: var(--border-size-big) solid var(--border-color);
-  border-radius: var(--border-radius);
-  z-index: 1000;
-  box-shadow: 15px 15px 24.5px var(--drop-shadow-color);
-} */
-
-.history.popup {
-  font-size: var(--font-size-base);
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  color: var(--primary-color);
-  min-width: fit-content;
-  /* position: fixed; */
-  /* top: 50%;
-  left: 50%; */
-  /* transform: translate(-50%, -50%); */
-  background-color: var(--secondary-color);
-  padding: 20px;
-  border: var(--border-size-big) solid var(--border-color);
-  border-radius: var(--border-radius);
+  border-radius: 32px;
   z-index: 1000;
   box-shadow: 15px 15px var(--drop-shadow-color);
-
 }
 
-  
-/* Winner Announcement */
-.winner {
-  margin-top: 1rem;
-  font-size: 2.5rem;
-  font-weight: 400;
+.history.popup {
+  min-width: fit-content;
+  background-color: var(--secondary);
+}
 
+.winner {
   font-size: 40px;
-  font-style: normal;
+  font-weight: 400;
   line-height: normal;
 }
 
 .winner.popup {
-
   position: fixed;
   top: 50%;
-  left: 50%; 
+  left: 50%;
   transform: translate(-50%, -50%);
   transition: opacity 0.3s ease;
   opacity: 1;
-  display: flex; 
+  display: flex;
   flex-direction: column;
-  justify-content: center; 
-  justify-content: stretch;
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   padding: 10px;
   min-width: 410.787px;
-  max-height: fit-content;
-  flex-shrink: 0;
 }
 
 .winner.popup.hidden {
   opacity: 0;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .winnerBtns {
   margin: 0;
   display: flex;
-  border: none;
   align-items: center;
   gap: 20px;
+  border: none;
 }
 
- .winner.popup button {
-  background: var(--quaternary-color);
-  color: var(--secondary-color);
+.winner.popup button {
+  background: var(--button);
+  color: var(--secondary);
   border-radius: 15px;
-  border: none;
   padding: 10px 15px;
   font-size: 24px;
-  width: fit-content;
   height: 60px;
-  align-items: center;
+}
 
-} 
-
+/* History Section */
 .history h3 {
   font-size: var(--font-size-big);
   margin-bottom: 8px;
@@ -176,22 +154,17 @@ svg.spinnerBackground {
 
 .history li {
   font-size: var(--font-size-big);
-  border-top: 1px dashed var(--border-color); /* Light dashed border */
+  border-top: 1px dashed var(--border-color);
   margin: 12px 0;
   padding-top: 12px;
   list-style: none;
-  overflow: scroll;
+  overflow-y: scroll;
   max-height: 200px;
 }
 
-.history ul {
-  padding: 0;
-  margin: 0;
-}
-
 .history button {
-  background-color: var(--quaternary-color); /* Subtle button background */
-  color: var(--secondary-color); /* Matching text color */
+  background-color: var(--button);
+  color: var(--secondary);
   border: var(--border-size-medium) solid var(--border-color);
   border-radius: 5px;
   padding: 5px 10px;
@@ -200,35 +173,53 @@ svg.spinnerBackground {
 }
 
 .history button:hover {
-  background-color: #d1e6f9; /* Slight hover effect */
+  background-color: #d1e6f9;
 }
 
-.historyBoxHeader {
-  margin: 0px;
+.picker {
+  position: relative;
+  width: 12vw; /* Dynamically adjust size */
+  height: 12vw;
+  max-width: 75px; /* Limit for larger screens */
+  max-height: 75px;
+  z-index: 10; /* Ensure it sits above the spinner */
+  /* top: 60; */
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-
-
-
-/* Responsive Styles */
+/* ---------------------------------------
+   Responsive Styles
+---------------------------------------- */
 @media screen and (max-width: 600px) {
-  /* Mobile Layout: Spinner Container */
-  .spinner-container {
-    flex-direction: column-reverse; /* Stacks items in reverse order */
-    gap: 1rem; /* Reduced spacing for smaller screens */
-    align-items: center; /* Center-align items */
-    text-align: center; /* Centers text alignment */
-    padding: 1rem; /* Adds padding for mobile */
+  
+  .title {
+    background-color: var(--secondary); 
+    border-radius: 75px;
+    border: 1.5px solid var(--border-color);
+    padding: 10px;
+    margin: 0;
+    width: 95%;
+    text-align: center;
+  }
+
+
+  .spinnerContainer {
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    max-width: 90%;
   }
 
   .spinner {
-    order: 0; /* Displays spinner at the top */
+    width: 100%;
   }
 
   .spinnerWheel {
-    margin: 0 auto; /* Centers spinner */
-    width: 300px; /* Adjusted size for mobile */
-    height: 300px;
+    width: 95%;
+    height: 95%;
+    font-weight: lighter;
   }
 
   .spinnerBackground {
@@ -237,17 +228,80 @@ svg.spinnerBackground {
     padding-top: 20px;
   }
 
-  .input-list {
-    max-width: 300px; /* Adjust input list width for mobile */
+  .inputList {
+    margin-top: 1rem;
+    order: 1;
+    max-width: 95%;
     min-height: 300px;
-    order: -1; /* Places input list at the bottom */
+    display: flex;
+    align-items: center;
+    text-align: center;
   }
 
-  .input-group input {
-    width: 80%; /* Input adjusts to screen size */
+  .menu {
+    margin-top: 1rem;
+    max-width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  button {
-    width: 80%; /* Buttons fit mobile screens */
+  .winner.popup {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 400px;
+    margin: 0;
   }
 }
+
+/* For screens smaller than 400px (extra small) */
+@media screen and (max-width: 500px) {
+  .spinnerContainer {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.5rem;
+    max-width: 95%;
+  }
+
+  .spinner {
+    width: 90%;
+  }
+
+  .spinnerWheel {
+    width: 90%;
+    height: 90%;
+    font-weight: normal;
+  }
+
+  /* .spinnerBackground {
+    width: 320px;
+    height: 340px;
+    padding-top: 15px;
+  } */
+
+  .spinnerBackground {
+    display: none;
+  }
+  .inputList {
+    /* margin-top: 0.5rem; */
+    min-height: 250px;
+  }
+
+  .menu {
+    margin-top: 0.5rem;
+  }
+
+  .winner.popup {
+    top: 25%;
+    min-width: 90%;
+  }
+}
+

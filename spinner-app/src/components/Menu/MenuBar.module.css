@@ -1,35 +1,141 @@
-.menu {
-    background-color: var(--secondary-color);
+/* Theme Preset Colors */
+.defaultTheme {
+    background: rgba(109, 57, 21, 1); /* Default */
+  }
+  
+  .greenTheme {
+    background: rgba(124, 146, 102, 1); /* Green */
+  }
+  
+  .pinkTheme {
+    background: rgba(210, 99, 160, 1); /* Pink */
+  }
+  
+  .blueTheme {
+    background: rgba(114, 152, 190, 1); /* Blue */
+  }
+  
+  .yellowTheme {
+    background: rgba(236, 187, 26, 1); /* Yellow */
+  }
+  
+  /* Menu Styling */
+  .menu {
+    background-color: var(--secondary);
     border-radius: 75px;
-    border: 1.5px solid black;
-    box-shadow: 12px 8px var(--drop-shadow-color);;
+    border: 1.5px solid var(--border-color);
+    box-shadow: 12px 8px var(--drop-shadow-color);
     padding: 10px;
-    width: 60px; /* Adjust width if necessary for button spacing */
-    display: flex; /* Flexbox to align content */
-    flex-direction: column; /* Stack SVGs vertically */
-    align-items: center; /* Center SVGs horizontally */
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-}
-
-.menu svg {
+  }
+  
+  .menu svg {
     width: 50px;
     height: 50px;
     cursor: pointer;
-    transition: transform 0.2s ease; /* Smooth scaling on hover */
-}
+    transition: transform 0.2s ease;
+    fill: var(--drop-shadow-color);
+  }
+  
+  .menu svg:hover {
+    transform: scale(1.1);
+    fill: var(--primary);
+  }
 
-.menu svg:hover {
-    transform: scale(1.1); /* Slight enlargement on hover */
-    fill: var(--accent-color);
-}
 
-.menu button {
-    all: unset; /* Removes default button styles */
-    display: flex; /* Ensures buttons properly wrap SVGs */
+  button.menuBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    /* all: unset; */
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px; /* Ensure buttons align with menu width */
-    height: 60px; /* Consistent button height */
-    margin-bottom: 5px; /* Add spacing between buttons */
-    border-radius: 10px; /* Optional for rounded button edges */
-}
+    width: 60px;
+    height: 60px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+  }
+  
+  /* Popup Styling */
+  .popup {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    width: 400px;
+    background: var(--secondary);
+    border: var(--border-size-big) solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: 15px 15px 24.5px var(--drop-shadow-color);
+    padding: var(--spacing-medium);
+    z-index: 1000;
+  }
+  
+  .popupHeader h3 {
+    font-family: var(--font-family-main);
+    color: var(--primary);
+    margin: 0;
+  }
+  
+  .popupContent h4 {
+    margin-top: var(--spacing-large);
+    font-size: var(--font-size-base);
+  }
+  
+  .presets {
+    display: flex;
+    justify-content: space-around;
+    margin-top: var(--spacing-medium);
+  }
+  
+  .presetButton {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: solid white 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+  }
+  
+  .presetButton:hover {
+    transform: scale(1.1);
+  }
+  
+  .closeButton {
+    margin-top: var(--spacing-large);
+    padding: var(--spacing-small) var(--spacing-medium);
+    background: var(--button);
+    color: var(--font-light);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+  }
+  
+  .closeButton:hover {
+    background: var(--primary);
+  }
+  
+  /* Responsive Styles */
+@media screen and (max-width: 600px) {
+    .menu {
+        background-color: var(--secondary);
+        border-radius: 75px;
+        border: 1.5px solid var(--border-color);
+        box-shadow: 6px 8px var(--drop-shadow-color);
+        padding: .5rem 2.5rem;
+        max-width: 95%;
+        min-width: fit-content;
+        height: 43px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+  }
+  

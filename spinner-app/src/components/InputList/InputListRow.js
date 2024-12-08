@@ -36,7 +36,7 @@ const InputListRow = ({ segment, deleteItem, editItem, showIcons, handleHide }) 
           className={`${segment.hidden ? `${styles.hidden}` : ""}`}
           onClick={() => !isEditing && handleHide(segment.id)} // Only toggle hidden state if not editing
           style={{
-            color: segment.hidden ? "black":`rgb(${segment.color.red * 255}, ${segment.color.green * 255}, ${segment.color.blue * 255})`,
+            color: segment.hidden ? `var(--border-color)`:`var(--primary)`,
             textDecoration: segment.hidden ? "line-through" : "none", cursor: "pointer",
           }}
         >

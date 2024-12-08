@@ -3,8 +3,13 @@ import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import InputList from "../InputList/InputList";
 import MenuBar from "../Menu/MenuBar";
+import { ThemeProvider } from "../utils/themesContext";
+import { useThemeContext } from "../utils/themesContext";
 import useColorSequence from "./useColorSequence";
 import SpinnerWheel from "./spinnerWheel";
+
+import hmpLogo from '../media/logo.png';
+
 
 const Spinner = () => {
   const [rotationAngle, setRotationAngle] = useState(0);
@@ -17,8 +22,53 @@ const Spinner = () => {
   const [chosenOptions, setChosenOptions] = useState({});
   const [isHistoryPopupVisible, setIsHistoryPopupVisible] = useState(false);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const { switchTheme } = useThemeContext(); 
+  const [title, setTitle] = useState("Help Me Pick!"); // Title state
+  const [isEditingTitle, setIsEditingTitle] = useState(false); // Edit mode state
 
+  const handleThemeChange = (newTheme) => {
+    const wheelColors = switchTheme(newTheme); // Get updated colors
+    setSegments((prevSegments) =>
+      prevSegments.map((segment, index) => ({
+        ...segment,
+        color: wheelColors[index % wheelColors.length],
+      }))
+    );
+  };
+  
   const getNextColor = useColorSequence();
+
+  /**
+   * Handles title click to toggle edit mode.
+   */
+  const handleTitleClick = () => {
+    setIsEditingTitle(true); // Enable edit mode
+  };
+
+  /**
+   * Handles title change when editing.
+   * @param {Event} event - The input event
+   */
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value); // Update title state
+  };
+
+  /**
+   * Exits the edit mode and finalizes the title.
+   */
+  const handleTitleBlur = () => {
+    setIsEditingTitle(false); // Exit edit mode
+  };
+
+  /**
+   * Handles Enter key to finalize the title.
+   * @param {KeyboardEvent} event - The keyboard event
+   */
+  const handleTitleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      setIsEditingTitle(false); // Exit edit mode
+    }
+  };
 
   /**
    * Hides the popup by setting its visibility state to false.
@@ -187,15 +237,9 @@ const spin = () => {
   setTimeout(() => {
     const normalizedAngle = (targetAngle % 360 + 360) % 360; // Normalize to 0-360
     const adjustedAngle = (360 - (normalizedAngle + pickerAngle) % 360) % 360; // Align with picker
-    
-    // Log adjustedAngle and visibleSegments for debugging
-    console.log("Adjusted Angle:", adjustedAngle);
-    console.log("Visible Segments:", visibleSegments);
 
     const segmentAngle = 360 / visibleSegments.length; // Angle per visible segment
     const winningIndex = Math.floor(adjustedAngle / segmentAngle);
-
-    console.log("Winning Index:", winningIndex);
 
     setWinner(visibleSegments[winningIndex]); // Correctly pick the winner from visible segments
     setIsPopupVisible(true);
@@ -204,78 +248,126 @@ const spin = () => {
 };
 
   return (
+    
+    
+    <div>
+    <header>
+      <img id = "logo" src={hmpLogo} alt=""></img>
+      <button id = "aboutus" href='#'>About HMP</button>
+    </header>
     <div className={styles.spinnerContainer}>
       <div className={styles.spinner}>
-        <h2>Help Me Pick!</h2>
-        <svg className={styles.spinnerBackground} viewBox="0 0 110 110">
-          <circle cx="57.5" cy="65" r="50"/>
-        </svg>
-        <SpinnerWheel
-          segments={segments}
-          rotationAngle={rotationAngle}
-          isSpinning={isSpinning}
-          spin={spin}
-        />
-        {winner && winner.label && (
-          <>
-            {isPopupVisible && (
-              <div className={`${styles.winner} ${styles.popup}`}>
-                <h3>
-                  <span style={{
-                    color: `rgb(${winner.color.red * 255}, ${winner.color.green * 255}, ${winner.color.blue * 255})`
-                  }}>
-                    {winner.label}
-                  </span>
-                </h3>
-                <div className={styles.winnerBtns}>
-                  <button onClick={() => handleHide(winner.id)}>
-                  {segments.find((segment) => segment.id === winner.id)?.hidden ? "Unhide Choice": "Hide Choice"}
-                  </button>
-                  <button onClick={handleClose}>Done</button>
+      {isEditingTitle ? (
+            <input
+              type="text"
+              className={styles.titleInput}
+              value={title}
+              onChange={handleTitleChange}
+              onBlur={handleTitleBlur}
+              onKeyPress={handleTitleKeyPress}
+              autoFocus
+            />
+          ) : (
+            <h2 className={styles.title} onClick={handleTitleClick}>
+              {title}
+            </h2>
+          )}
+
+          <div className={styles.wheel}>
+            
+
+            {/* Static heart picker */}
+            <svg
+            className={styles.picker}
+            style={{
+              top: "50", // Adjust to position it above the spinner
+              left: "50%",
+              transform: "translateX(-50%)", // Center horizontally
+          }}
+            viewBox="0 0 96 96"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+              <path d="M26 26C26 43.8144 48 62 48 62C48 62 70 43.8144 70 26" stroke="#E36F6F" stroke-width="51" stroke-linecap="round"/>
+            </svg>
+            <ThemeProvider>
+            <SpinnerWheel
+              segments={segments}
+              rotationAngle={rotationAngle}
+              isSpinning={isSpinning}
+              spin={spin}
+            /> 
+            </ThemeProvider>
+          </div>
+          
+          
+          {winner && winner.label && (
+            <>
+              {isPopupVisible && (
+                <div className={`${styles.winner} ${styles.popup}`}>
+                  <h3>
+                    <span style={{
+                      color: `var(--primary)`
+                    }}>
+                      {winner.label}
+                    </span>
+                  </h3>
+                  <div className={styles.winnerBtns}>
+                    <button onClick={() => handleHide(winner.id)}>
+                    {segments.find((segment) => segment.id === winner.id)?.hidden ? "Unhide Choice": "Hide Choice"}
+                    </button>
+                    <button onClick={handleClose}>Done</button>
+                  </div>
                 </div>
-              </div>
-            )}
-          </>
+              )}
+            </>
+          )}
+        </div>
+
+        <div className={styles.inputList}>
+          <InputList
+          input={input}
+          setInput={setInput}
+          segments={segments}
+          addItem={addItem}
+          deleteItem={deleteItem}
+          editItem={editItem}
+          showIcons = {showIcons}
+          handleHide={handleHide}
+        />  
+        </div>
+          
+        <div className={styles.menu}>
+          <MenuBar
+          toggleIcons={toggleIcons}
+          resetWheel={resetWheel}
+          toggleHistory={toggleHistory}
+          applyCustomTheme={handleThemeChange}
+        />
+        </div>
+
+        {isHistoryPopupVisible && (
+          <div className={`${styles.history} ${styles.popup}`}>
+
+            <div className={styles.historyBoxHeader}>
+
+              <h3>History</h3>
+              <p class = "subtext">View the selected options here.</p>
+            </div>
+            <div className= {styles.historyBoxContent}>
+              <ul>
+                {Object.entries(chosenOptions).map(([option, data]) => (
+                  <li key={option}> 
+                    {option}: {data.count} time{data.count > 1 ? "s" : ""}
+                  </li>
+                ))}
+              </ul>
+
+              {/* <button onClick={toggleHistory}>Close</button> */}
+            </div>
+
+          </div>
         )}
       </div>
-
-      <InputList
-        input={input}
-        setInput={setInput}
-        segments={segments}
-        addItem={addItem}
-        deleteItem={deleteItem}
-        editItem={editItem}
-        showIcons = {showIcons}
-        handleHide={handleHide}
-      />    
-
-      <div>
-        <MenuBar toggleIcons={toggleIcons} resetWheel={resetWheel} toggleHistory={toggleHistory}/>
-      </div>
-
-      {isHistoryPopupVisible && (
-        <div className={`${styles.history} ${styles.popup}`}>
-
-          <div className={styles.historyBoxHeader}>
-
-            <h3>History</h3>
-            <p>View the selected options here.</p>
-          </div>
-          <div className= {styles.historyBoxContent}>
-            <ul>
-              {Object.entries(chosenOptions).map(([option, data]) => (
-                <li key={option}> 
-                  {option}: {data.count} time{data.count > 1 ? "s" : ""}
-                </li>
-              ))}
-            </ul>
-
-            {/* <button onClick={toggleHistory}>Close</button> */}
-          </div>
-
-        </div>
-      )}
     </div>
   );
 };

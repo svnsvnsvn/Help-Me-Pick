@@ -10,7 +10,7 @@ button:active svg {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--tertiary-color);
+  background-color: var(--tertiary);
   margin: 10px 0px;
   padding: 10px;
   border-radius: 8px;
@@ -45,15 +45,16 @@ button:active svg {
 }
 
 .editItems button svg {
-  width: 35px;
-  height: 35px;
-  fill: #000000; /* Icon color */
-  transition: fill 0.2s ease, transform 0.2s ease; /* Smooth hover effects */
+  padding: 0px;
+  width: 25px;
+  height: 25px;
+  fill: var(--primary); 
+  transition: fill 0.2s ease, transform 0.2s ease;
 }
 
 .editItems button:hover svg {
-  fill: #ff628e; /* Darker shade on hover */
-  transform: scale(1.1); /* Slight zoom effect */
+  fill: var(--primary);
+  transform: scale(1.1); 
 }
 
 /* Adjust spacing between buttons */
@@ -66,38 +67,41 @@ button + button {
 .inputList {
   width: 100%;
   min-height: 700px;
-  max-width: 400px; /* Limits input list width */
-  align-items: flex-start; /* Align items to the top */
-  background-color: var(--secondary-color); /* Distinct background */
-  border-radius: 25px; /* Rounded corners */
-  padding: 0px 25px; /* Horizontal padding */
+  max-width: 400px; 
+  align-items: flex-start;
+  background-color: var(--secondary); 
+  border-radius: 25px;
+  padding: 10px 25px;
   box-shadow: 15px 15px var(--drop-shadow-color);
-  outline: 1.5px solid rgb(0, 0, 0); /* Additional border */
+  outline: 1.5px solid var(--border-color);
 }
 
 /* Pie Slices in the Input List */
 .pieSlices {
+  background: var(--bg-tertiary);
   border-radius: 15px;
-  border: 1.5px solid black;
+  border: 1.5px solid var(--border-color);
   padding: 10px;
   max-height: 500px;
   overflow: scroll;
+  margin-top: 2rem;
+
 }
 
 /* Input Group */
-.input-group {
+.inputGroup {
   display: flex;
   border-radius: 15px;
   border: 1.5px solid var(--border-color);
   max-height: 100px;
 }
 
-.input-group input {
+.inputGroup input {
   flex-grow: 1; /* Expands input to fill available space */
   padding: 0.5rem;
-  border-radius: 12px 0px 0px 12px; /* Rounded input*/
+  border-radius: 12px 0px 0px 12px;
   border: none;
-  background-color: var(--tertiary-color);
+  background-color: var(--bg-tertiary);
   display: flex;
   width: 378.142px;
   padding: 16px 14px;
@@ -107,7 +111,7 @@ button + button {
 }
 
 .input-group input::placeholder {
-  color: var(--primary-color);
+  color: var(--border-color);
   font-style: italic; 
   font-size: medium;
 }
@@ -117,21 +121,18 @@ button + button {
   border: none;
 }
 
-.input-group input:focus {
-  border: none;
-  outline: none;
-}
-
 /* Button Styles */
 button:disabled {
-  background-color: var(--primary-color);
+  background-color: var(--primary);
   cursor:not-allowed;
 }
 
+
 button {
-  background-color: var(--quaternary-color);
-  border-radius: 0px 10px 10px 0px; /* Top-right, Bottom-right, Bottom-left, Top-left */
-  fill: var(--secondary-color);
+  background-color: var(--button);
+  border-radius: 0px 12px 12px 0px; /* Top-right, Bottom-right, Bottom-left, Top-left */
+  border: none;
+  fill: var(--secondary);
   cursor: pointer;
 }
 
@@ -141,7 +142,11 @@ button {
   padding: 0px;
   border-radius: 5px;
   border: transparent;
-  border-bottom: solid black; /* Underline styling */
+  /*border-bottom: solid var(--border-color);  Underline styling */
+}
+.editInput:focus {
+  border: none;
+  outline: none;
 }
 
 /* Action Buttons */
@@ -152,4 +157,19 @@ button {
   margin: 0;
   padding: 0;
   font-size: 0.875rem;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+  /* Input List */
+.inputList {
+  justify-content: center;
+  max-width: 90%;
+  align-items: flex-start; /* Align items to the top */
+  background-color: var(--secondary); /* Distinct background */
+  border-radius: 25px; /* Rounded corners */
+  box-shadow: 10px 10px var(--drop-shadow-color);
+  outline: 1.5px solid var(--border-color); /* Additional border */
+}
+
 }

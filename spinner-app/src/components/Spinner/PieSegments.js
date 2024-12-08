@@ -1,6 +1,11 @@
 import React from "react";
+import { getFontColor } from "../utils/utils";
 
 const PieSegment = ({ startAngle, endAngle, color, label }) => {
+  const { red, green, blue } = color;
+
+  const fontColor = getFontColor(red * 255, green * 255, blue * 255);
+
   const isFullCircle = startAngle === 0 && endAngle === 360;
   // Truncate the label if it's too long
   const truncateLabel = (text, maxLength = 10) => {
@@ -26,16 +31,17 @@ const PieSegment = ({ startAngle, endAngle, color, label }) => {
     <>
       {/* Draw the segment */}
       <path
+        className="wheelSlice"
         d={isFullCircle
           ? `M50 50 m-50,0 a50,50 0 1,0 100,0 a50,50 0 1,0 -100,0` // Full circle
           : `M50 50 L${x1} ${y1} A50 50 0 0 1 ${x2} ${y2} Z`} // Regular segment
-        fill={color}
-      />
+          fill={`rgb(${red * 255}, ${green * 255}, ${blue * 255})`}
+          />
       {/* Add the rotated label */}
       <text
         x={labelX}
         y={labelY}
-        fill="black"
+        fill={fontColor}
         fontSize="4"
         fontWeight="bold"
         textAnchor= 'middle'

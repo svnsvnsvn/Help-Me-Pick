@@ -2,6 +2,10 @@
 /node_modules
 spinner-app/node_modules/
 
+.json
+
+/media
+
 # dependencies
 /node_modules
 /.pnp

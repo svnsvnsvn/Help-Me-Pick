@@ -1,13 +1,26 @@
-import {useRef, useState} from 'react';
-import {shuffleArray, miffyColors} from '../utils/utils'
+import { useRef, useState, useContext, useEffect } from 'react';
+import {shuffleArray} from '../utils/utils'
+import { ThemeContext } from '../utils/themesContext'; // Import ThemeContext
 
 /**
  * 
  * @returns 
  */
 const useColorSequence = () => {
-    const [colorSequence, setColorSequence] = useState(shuffleArray(miffyColors));
+    const { currentTheme } = useContext(ThemeContext);
+    const [colorSequence, setColorSequence] = useState([]);
     const colorIndexRef = useRef(0);
+
+    // Update color sequence whenever the theme changes
+    useEffect(() => {
+        if (currentTheme?.wheelColors) {
+            const shuffledColors = shuffleArray(currentTheme.wheelColors);
+            setColorSequence(shuffledColors);
+            colorIndexRef.current = 0; // Reset the index when theme changes
+        } else {
+            console.warn("No wheelColors found in currentTheme:", currentTheme);
+        }
+    }, [currentTheme])
 
     /**
      * Retrieves the next color from the current color sequence and updates the sequence if necessary.
@@ -26,13 +39,12 @@ const useColorSequence = () => {
         colorIndexRef.current++;
 
         if (colorIndexRef.current >= colorSequence.length) {
-            setColorSequence(shuffleArray(miffyColors));
+            setColorSequence(shuffleArray(colorSequence));
             colorIndexRef.current = 0;
         }
 
         return nextColor;
     };
-
     return getNextColor;
 };
 
