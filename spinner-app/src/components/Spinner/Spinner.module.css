@@ -124,6 +124,17 @@ svg.spinnerBackground {
   pointer-events: none;
 }
 
+.winnerGif {
+  width: 100%;
+  max-width: 300px; /* Adjust to desired size */
+  margin: 20px auto;
+  display: block;
+}
+
+.gifContainer {
+  text-align: center; /* Center-align the GIF */
+}
+
 .winnerBtns {
   margin: 0;
   display: flex;

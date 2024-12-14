@@ -9,6 +9,7 @@ import useColorSequence from "./useColorSequence";
 import SpinnerWheel from "./spinnerWheel";
 
 import hmpLogo from '../media/logo.png';
+import winnerConfetti from '../media/confetti.gif'
 
 
 const Spinner = () => {
@@ -229,7 +230,12 @@ const spin = () => {
   if (isSpinning || visibleSegments.length === 0) return; // Prevent spinning if no visible segments
   setIsSpinning(true);
 
-  const duration = Math.random() * 5 + 2; // Spin duration
+  // const duration = Math.random() * 5 + 2; // Spin duration
+
+  // Choose a random duration (3, 4, or 5 seconds)
+  const durations = [3, 4, 5];
+  const duration = durations[Math.floor(Math.random() * durations.length)];
+
   const targetAngle = rotationAngle + 360 * 3 + Math.random() * 360;
 
   setRotationAngle(targetAngle);
@@ -245,6 +251,7 @@ const spin = () => {
     setIsPopupVisible(true);
     setTimeout(() => setIsSpinning(false), 50);
   }, duration * 1000);
+  
 };
 
   return (
@@ -264,7 +271,7 @@ const spin = () => {
               value={title}
               onChange={handleTitleChange}
               onBlur={handleTitleBlur}
-              onKeyPress={handleTitleKeyPress}
+              onKeyDown={handleTitleKeyPress}
               autoFocus
             />
           ) : (
@@ -311,6 +318,16 @@ const spin = () => {
                       {winner.label}
                     </span>
                   </h3>
+
+                {/* Add GIF here */}
+                <div className={styles.gifContainer}>
+                  <img 
+                    src= {winnerConfetti} 
+                    alt="Winner Celebration"
+                    className={styles.winnerGif}
+                  />
+                </div>
+
                   <div className={styles.winnerBtns}>
                     <button onClick={() => handleHide(winner.id)}>
                     {segments.find((segment) => segment.id === winner.id)?.hidden ? "Unhide Choice": "Hide Choice"}

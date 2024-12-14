@@ -31,6 +31,7 @@ const SpinnerWheel = ({ segments, rotationAngle, isSpinning, spin }) => {
                 transition: isSpinning ? "transform 3s cubic-bezier(0.25, 0.1, 0.25, 1)" : "none",
             }}
             onClick={spin}
+            // onTransitionEnd={handleSpinEnd}
         >
             {visibleSegments.length > 0 ? (
                 visibleSegments.map((segment, index) => {
