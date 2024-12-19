@@ -8,7 +8,7 @@ import {getRGBFromCSSVariable} from "../utils/utils";
  * @param {*} param0 
  * @returns 
  */
-const SpinnerWheel = ({ segments, rotationAngle, isSpinning, spin }) => {
+const Wheel = ({ segments, rotationAngle, isSpinning, spin }) => {
     const visibleSegments = segments.filter((s) => !s.hidden);
     const segmentAngle = 360 / visibleSegments.length; // Angle per visible segment
 
@@ -61,4 +61,4 @@ const SpinnerWheel = ({ segments, rotationAngle, isSpinning, spin }) => {
     );
 };
 
-export default SpinnerWheel;
+export default Wheel;

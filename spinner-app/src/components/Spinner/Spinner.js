@@ -6,7 +6,7 @@ import MenuBar from "../Menu/MenuBar";
 import { ThemeProvider } from "../utils/themesContext";
 import { useThemeContext } from "../utils/themesContext";
 import useColorSequence from "./useColorSequence";
-import SpinnerWheel from "./spinnerWheel";
+import Wheel from "./SpinnerWheel";
 
 import hmpLogo from '../media/logo.png';
 import winnerConfetti from '../media/confetti.gif'
@@ -306,7 +306,7 @@ const spin = () => {
               <path d="M26 26C26 43.8144 48 62 48 62C48 62 70 43.8144 70 26" stroke="#E36F6F" stroke-width="51" stroke-linecap="round"/>
             </svg>
             <ThemeProvider>
-            <SpinnerWheel
+            <Wheel
               segments={segments}
               rotationAngle={rotationAngle}
               isSpinning={isSpinning}
