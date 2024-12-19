@@ -32,7 +32,6 @@ Modern life is full of choices—and the stress of making decisions can lead to 
    - **Weighted Choices** to favor certain outcomes.
    - **Elimination Mode** for a process of elimination.
 3. Let **Help Me Pick!** provide a fun and interactive decision-making experience.
-4. Save your list for future use!
 
 ---
 
