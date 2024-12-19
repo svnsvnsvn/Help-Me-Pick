@@ -6,7 +6,7 @@ import MenuBar from "../Menu/MenuBar";
 import { ThemeProvider } from "../utils/themesContext";
 import { useThemeContext } from "../utils/themesContext";
 import useColorSequence from "./useColorSequence";
-import SpinnerWheel from "./spinnerWheel";
+import SpinnerWheel from "./SpinnerWheel";
 
 import hmpLogo from '../media/logo.png';
 import winnerConfetti from '../media/confetti.gif'
