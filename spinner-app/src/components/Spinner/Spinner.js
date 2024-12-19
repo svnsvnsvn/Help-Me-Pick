@@ -25,7 +25,9 @@ const Spinner = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const { switchTheme } = useThemeContext(); 
   const [title, setTitle] = useState("Help Me Pick!"); // Title state
-  const [isEditingTitle, setIsEditingTitle] = useState(false); // Edit mode state
+  const [isEditingTitle, setIsEditingTitle] = useState(false); 
+  const [gifSrc, setGifSrc] = useState(winnerConfetti);
+
 
   const handleThemeChange = (newTheme) => {
     const wheelColors = switchTheme(newTheme); // Get updated colors
@@ -224,6 +226,13 @@ const Spinner = () => {
     }
   }, [winner]);
 
+  useEffect(() => {
+    if (winner) {
+      // Update the GIF source with a timestamp to ensure it reloads
+      setGifSrc(`${winnerConfetti}?t=${Date.now()}`);
+    }
+  }, [winner]);
+  
 const spin = () => {
   const visibleSegments = segments.filter((s) => !s.hidden);
 
@@ -306,38 +315,44 @@ const spin = () => {
             </ThemeProvider>
           </div>
           
-          
           {winner && winner.label && (
             <>
               {isPopupVisible && (
-                <div className={`${styles.winner} ${styles.popup}`}>
-                  <h3>
-                    <span style={{
-                      color: `var(--primary)`
-                    }}>
-                      {winner.label}
-                    </span>
-                  </h3>
-
-                {/* Add GIF here */}
-                <div className={styles.gifContainer}>
-                  <img 
-                    src= {winnerConfetti} 
-                    alt="Winner Celebration"
-                    className={styles.winnerGif}
-                  />
-                </div>
-
-                  <div className={styles.winnerBtns}>
-                    <button onClick={() => handleHide(winner.id)}>
-                    {segments.find((segment) => segment.id === winner.id)?.hidden ? "Unhide Choice": "Hide Choice"}
-                    </button>
-                    <button onClick={handleClose}>Done</button>
+                <>
+                  {/* Full-screen GIF */}
+                  <div className={styles.gifContainer}>
+                    <img
+                      src={gifSrc}
+                      alt="Winner Celebration"
+                      className={styles.winnerGif}
+                    />
                   </div>
-                </div>
+
+                  {/* Popup Content */}
+                  <div className={`${styles.winner} ${styles.popup}`}>
+                    <h3>
+                      <span
+                        style={{
+                          color: `var(--primary)`,
+                        }}
+                      >
+                        {winner.label}
+                      </span>
+                    </h3>
+                    <div className={styles.winnerBtns}>
+                      <button onClick={() => handleHide(winner.id)}>
+                        {segments.find((segment) => segment.id === winner.id)?.hidden
+                          ? "Unhide Choice"
+                          : "Hide Choice"}
+                      </button>
+                      <button onClick={handleClose}>Done</button>
+                    </div>
+                  </div>
+                </>
               )}
             </>
           )}
+
         </div>
 
         <div className={styles.inputList}>
