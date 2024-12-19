@@ -1,6 +1,6 @@
 import styles from "./Spinner.module.css"
 import React from "react";
-import PieSegment from "./pieSegments";
+import PieSegment from "./PieSegments";
 import {getRGBFromCSSVariable} from "../utils/utils";
 
 /**
