@@ -73,8 +73,7 @@ Modern life is full of choices—and the stress of making decisions can lead to 
 | **Animations**         | CSS Transitions, SVG Manipulation      | Smooth animations for spinning effects using CSS transitions and dynamic SVG rendering for spinner segments. |
 | **SVG Rendering**      | React JSX, Dynamic SVG Paths           | Spinner and segments are rendered using `<svg>` elements, with precise path calculations for smooth visuals. |
 | **Utilities**          | Custom Functions (e.g., Color Utils)   | Includes helper functions for randomization, color contrast adjustments, and font color calculations. |
-| **Backend** (Optional) | None (Frontend-only)                   | Currently, the app is fully frontend-driven, with no server-side components or persistent data storage. |
-
+---
 
 ## Installation 🛠️
 
