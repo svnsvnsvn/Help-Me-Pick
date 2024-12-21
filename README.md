@@ -1,6 +1,6 @@
 # Help Me Pick! 🌀
 <p align="center">
-  <img src="logo.png" alt="Help Me Pick! Logo" width="200">
+  <img src="spinner-app/src/components/media/logo.png" alt="Help Me Pick! Logo" width="200">
 </p>
 
 **Help Me Pick!** is an interactive decision-making tool that simplifies choices with a touch of playfulness. Designed to streamline decision-making and eliminate the stress of indecision, it offers dynamic features and a highly customizable user experience.
@@ -13,6 +13,36 @@ Modern life is full of choices—and the stress of making decisions can lead to 
 
 ---
 
+### Try it! 🌟
+[https://help-me-pick.vercel.app/](https://help-me-pick.vercel.app/)
+
+## Preview ✨
+<div>
+    <img src="spinner-app/public/default.png" alt="Help Me Pick! Preview Default" width="500">
+    <img src="spinner-app/public/test.png" alt="Help Me Pick! Preview Demo" width="500">
+</div>
+
+
+
+## How It Works 📚
+
+1. Add a list of options tailored to your decision-making needs.
+2. Select one of the decision modes:
+   - **Spin the Wheel** for a random result.
+   - **Weighted Choices** to favor certain outcomes.
+   - **Elimination Mode** for a process of elimination.
+3. Let **Help Me Pick!** provide a fun and interactive decision-making experience.
+
+---
+
+## Real-World Use Cases 🎉
+
+- **Team Collaboration:** Decide on meeting topics or project directions.
+- **Daily Life:** Pick meals, movies, or outfits.
+- **Creative Brainstorming:** Narrow down ideas in a fun way.
+
+---
+
 ## Features 🚀
 
 ### 🎯 Smart Decision Modes
@@ -22,11 +52,10 @@ Modern life is full of choices—and the stress of making decisions can lead to 
 
 ### ✍️ Personalization
 - Fully customizable option lists for any scenario.
-- Save frequent lists and re-use them instantly.
 
 ### 🌟 Intuitive User Interface
 - Clean, responsive design optimized for desktop and mobile devices.
-- Engaging animations for a delightful user experience.
+- Engaging animations for a fun user experience.
 
 ### 🛠️ Built with Scalability in Mind
 - **Frontend:** JavaScript + React for dynamic interactivity.
@@ -34,13 +63,16 @@ Modern life is full of choices—and the stress of making decisions can lead to 
 
 ---
 
-## Technical Stack 💻
+## Technology Stack 💻
 
-| Stack Component | Technology Used           |
-|------------------|---------------------------|
-| Frontend         | React, JavaScript, CSS    |
-| Backend          | Node.js, Express          |
-
+| **Stack Component**    | **Technology Used**                    | **Description**                                                                                     |
+|-------------------------|----------------------------------------|-----------------------------------------------------------------------------------------------------|
+| **Frontend**           | React, JavaScript, CSS Modules         | Handles core UI, dynamic interactivity, and styling. Scoped CSS Modules ensure modular and reusable styles. |
+| **State Management**   | React Hooks, Context API               | `useState` and `useEffect` manage component states, while Context API provides global theming support. |
+| **Theming**            | Custom Theme Provider, CSS Variables   | Dynamically updates colors and styles based on user-selected themes using `ThemeContext` and CSS variables. |
+| **Animations**         | CSS Transitions, SVG Manipulation      | Smooth animations for spinning effects using CSS transitions and dynamic SVG rendering for spinner segments. |
+| **SVG Rendering**      | React JSX, Dynamic SVG Paths           | Spinner and segments are rendered using `<svg>` elements, with precise path calculations for smooth visuals. |
+| **Utilities**          | Custom Functions (e.g., Color Utils)   | Includes helper functions for randomization, color contrast adjustments, and font color calculations. |
 ---
 
 ## Installation 🛠️
@@ -65,25 +97,9 @@ Modern life is full of choices—and the stress of making decisions can lead to 
 
 ---
 
-## How It Works 📚
-
-1. Add a list of options tailored to your decision-making needs.
-2. Select one of the decision modes:
-   - **Spin the Wheel** for a random result.
-   - **Weighted Choices** to favor certain outcomes.
-   - **Elimination Mode** for a process of elimination.
-3. Let **Help Me Pick!** provide a fun and interactive decision-making experience.
-4. Save your list for future use!
-
----
-
-## Real-World Use Cases 🎉
-
-- **Team Collaboration:** Decide on meeting topics or project directions.
-- **Daily Life:** Pick meals, movies, or outfits.
-- **Creative Brainstorming:** Narrow down ideas in a fun way.
-
----
+### 🛠️ Built with Scalability in Mind
+- **Frontend:** JavaScript + React for dynamic interactivity.
+- **Backend (Planned):** Node.js and Express for future API handling.
 
 ## Future Roadmap 🛤️
 
