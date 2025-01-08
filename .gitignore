@@ -1,5 +1,4 @@
 /swift
-/node_modules
 spinner-app/node_modules/
 
 .json
@@ -21,8 +20,11 @@ spinner-app/build
 .env.development.local
 .env.test.local
 .env.production.local
+.package-lock.json
+.package.json
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 spinner-app/src/components/media/icons
+spinner-app/src/components/styles
