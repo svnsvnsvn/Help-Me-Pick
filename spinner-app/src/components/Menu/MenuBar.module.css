@@ -121,6 +121,26 @@
     background: var(--primary);
   }
   
+  .comingSoonOverlay {
+    visibility: hidden;
+    width: 120px;
+    background-color: var(--primary);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .comingSoon:hover .comingSoonOverlay {
+    visibility: visible; 
+  }
+  
+  
+  
   /* Responsive Styles */
 @media screen and (max-width: 600px) {
     .menu {
