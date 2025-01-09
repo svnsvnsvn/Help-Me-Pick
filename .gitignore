@@ -1,7 +1,3 @@
-/swift
-spinner-app/node_modules/
-
-.json
 
 # dependencies
 /node_modules
@@ -23,8 +19,14 @@ spinner-app/build
 .package-lock.json
 .package.json
 
+/swift
+
+.json
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 spinner-app/src/components/media/icons
 spinner-app/src/components/styles
+
+spinner-app/node_modules/
